@@ -346,6 +346,8 @@ export default function Home() {
 
   useEffect(() => {
     try {
+      // Hydrate the browser-only preference after the first client render.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFavorites(JSON.parse(localStorage.getItem("ada-ai-favorites") || "[]"));
     } catch {}
   }, []);
@@ -433,6 +435,8 @@ export default function Home() {
     const trimmed = query.trim();
     if (!trimmed) {
       if (activeQuery) {
+        // Clearing the field restores the full catalog immediately.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setActiveQuery("");
         setCategory("全部工具");
         setFilter("全部");
@@ -443,6 +447,9 @@ export default function Home() {
     setSearchNotice("");
     const timer = window.setTimeout(() => applySearch(trimmed), 450);
     return () => window.clearTimeout(timer);
+    // applySearch intentionally uses the current component state and runs only
+    // after the debounced query changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, activeQuery, view]);
 
   return (
