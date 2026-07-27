@@ -42,7 +42,8 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .brand-mark {
   display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px;
   background: linear-gradient(135deg, #31d9ff, #715dff 55%, #ad52ff);
-  box-shadow: 0 0 28px rgba(88, 92, 255, .42); color: white; font-weight: 900;
+  box-shadow: 0 0 28px rgba(88, 92, 255, .42); color: white; font-size: 14px;
+  font-weight: 900; letter-spacing: -1px;
 }
 .desktop-nav { display: flex; gap: 32px; }
 .desktop-nav button { position: relative; border: 0; background: transparent; color: var(--muted); font-size: 14px; padding: 32px 0; }

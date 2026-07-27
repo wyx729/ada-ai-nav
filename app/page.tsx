@@ -138,7 +138,7 @@ export default function Home() {
         <>
           <header className="topbar">
             <button className="brand" onClick={() => setView("home")} aria-label="返回首页">
-              <span className="brand-mark">A</span>
+              <span className="brand-mark">AI</span>
               <span>Ada <b>AI导航</b></span>
             </button>
             <nav className="desktop-nav" aria-label="主导航">
@@ -210,7 +210,7 @@ export default function Home() {
         <div className="library-layout">
           <aside className="sidebar">
             <button className="brand sidebar-brand" onClick={() => setView("home")}>
-              <span className="brand-mark">A</span><span>Ada <b>AI导航</b></span>
+              <span className="brand-mark">AI</span><span>Ada <b>AI导航</b></span>
             </button>
             <p className="side-label">发现</p>
             <nav className="side-nav" aria-label="工具分类">
@@ -229,7 +229,7 @@ export default function Home() {
 
           <section className="library-main">
             <div className="mobile-library-head">
-              <button className="brand" onClick={() => setView("home")}><span className="brand-mark">A</span><span>Ada <b>AI导航</b></span></button>
+              <button className="brand" onClick={() => setView("home")}><span className="brand-mark">AI</span><span>Ada <b>AI导航</b></span></button>
               <button className="mobile-follow" onClick={() => setFollowOpen(true)}>关注</button>
             </div>
             <div className="library-header">
