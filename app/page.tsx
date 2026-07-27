@@ -160,6 +160,41 @@ const tools: Tool[] = [
 
 const trendNames = ["DeepSeek", "即梦 AI", "豆包", "Trae"];
 
+const contacts = [
+  {
+    name: "微信",
+    short: "微",
+    image: "/contact/wechat.jpeg",
+    account: "扫码添加好友",
+    note: "交流合作与 AI 工具分享",
+    tone: "wechat",
+  },
+  {
+    name: "抖音",
+    short: "抖",
+    image: "/contact/douyin.jpeg",
+    account: "好心情. · w979046217",
+    note: "AI 工具实测与成长记录",
+    tone: "douyin",
+  },
+  {
+    name: "小红书",
+    short: "红",
+    image: "/contact/xiaohongshu.jpeg",
+    account: "Ada聊AI · 63895799592",
+    note: "AI 教程、工作流与经验分享",
+    tone: "xiaohongshu",
+  },
+  {
+    name: "B站",
+    short: "B",
+    image: "/contact/bilibili.jpeg",
+    account: "佛系卷王王摆摆 · UID 3546875359660999",
+    note: "系统化 AI 视频与学习内容",
+    tone: "bilibili",
+  },
+] as const;
+
 function logoUrl(domain: string) {
   const clean = domain.split("/")[0];
   return `https://www.google.com/s2/favicons?domain_url=https://${clean}&sz=128`;
@@ -303,7 +338,11 @@ export default function Home() {
               <p>持续分享 AI 工具实测、零基础教程和高效工作流。</p>
             </div>
             <div className="creator-actions">
-              {["抖音", "小红书", "微信"].map((name) => <button key={name} onClick={() => setFollowOpen(true)}>{name}<span>扫码关注</span></button>)}
+              {contacts.map((contact) => (
+                <button key={contact.name} className={contact.tone} onClick={() => setFollowOpen(true)}>
+                  <i>{contact.short}</i>{contact.name}<span>扫码关注</span>
+                </button>
+              ))}
             </div>
           </section>
         </>
@@ -323,7 +362,13 @@ export default function Home() {
             </nav>
             <div className="side-follow">
               <p>关注主理人</p><span>获取 AI 工具实测与教程</span>
-              <div className="mini-qr-row">{[1,2,3].map((n) => <button key={n} onClick={() => setFollowOpen(true)} aria-label="打开关注二维码"><i /></button>)}</div>
+              <div className="mini-qr-row">
+                {contacts.map((contact) => (
+                  <button key={contact.name} className={contact.tone} onClick={() => setFollowOpen(true)} aria-label={`打开${contact.name}二维码`}>
+                    {contact.short}
+                  </button>
+                ))}
+              </div>
             </div>
             <button className="back-home" onClick={() => setView("home")}>← 返回品牌首页</button>
           </aside>
@@ -391,11 +436,25 @@ export default function Home() {
           <section className="follow-modal" onMouseDown={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
             <button className="modal-close" onClick={() => setFollowOpen(false)}>×</button>
             <small>FOLLOW ADA</small>
-            <h2>关注我，持续获取 AI 工具</h2>
-            <p>二维码将在你提供原图后替换，目前已预留完整展示位置。</p>
+            <h2>在你常用的平台找到我</h2>
+            <p>持续分享 AI 工具实测、零基础教程、工作流和成长记录。</p>
             <div className="qr-grid">
-              {["抖音", "小红书", "微信"].map((name) => (
-                <div key={name}><div className="qr-placeholder"><span>Ada</span><i /></div><b>{name}</b><small>扫码关注</small></div>
+              {contacts.map((contact) => (
+                <article className={`qr-card ${contact.tone}`} key={contact.name}>
+                  <div className="qr-card-head">
+                    <span>{contact.short}</span>
+                    <div><b>{contact.name}</b><small>{contact.account}</small></div>
+                  </div>
+                  <button
+                    className="qr-image"
+                    onClick={() => window.open(contact.image, "_blank", "noopener,noreferrer")}
+                    aria-label={`放大查看${contact.name}二维码`}
+                  >
+                    <img src={contact.image} alt={`${contact.name}关注二维码`} />
+                  </button>
+                  <p>{contact.note}</p>
+                  <span className="qr-tip">点击二维码可放大 · 长按可保存</span>
+                </article>
               ))}
             </div>
           </section>

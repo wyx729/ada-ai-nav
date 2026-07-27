@@ -92,8 +92,10 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .card-arrow { color: #9f93f8; font-size: 19px; }
 .creator-strip { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto 85px; padding: 30px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(120, 103, 255, .36); border-radius: 24px; background: linear-gradient(110deg, rgba(35, 32, 80, .88), rgba(13, 18, 42, .88)); }
 .creator-strip p { color: var(--muted); margin: 9px 0 0; font-size: 13px; }
-.creator-actions { display: flex; gap: 10px; }
-.creator-actions button { width: 100px; height: 76px; border-radius: 14px; border: 1px solid rgba(132, 120, 215, .25); background: rgba(31, 32, 73, .9); font-weight: 700; }
+.creator-actions { display: grid; grid-template-columns: repeat(4, 90px); gap: 9px; }
+.creator-actions button { height: 76px; border-radius: 14px; border: 1px solid rgba(132, 120, 215, .25); background: rgba(31, 32, 73, .9); font-weight: 700; transition: .2s ease; }
+.creator-actions button:hover { transform: translateY(-2px); border-color: rgba(143, 126, 255, .65); background: rgba(48, 44, 96, .92); }
+.creator-actions button i { display: inline-grid; place-items: center; width: 20px; height: 20px; margin-right: 6px; border-radius: 7px; background: rgba(255,255,255,.1); color: white; font-size: 10px; font-style: normal; }
 .creator-actions button span { display: block; margin-top: 6px; color: var(--muted); font-size: 10px; font-weight: 400; }
 
 .library-layout { min-height: 100vh; display: grid; grid-template-columns: 250px 1fr; }
@@ -110,8 +112,8 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .side-follow p { margin: 0 0 5px; font-size: 13px; font-weight: 700; }
 .side-follow > span { color: #848daa; font-size: 10px; }
 .mini-qr-row { display: flex; gap: 7px; margin-top: 12px; }
-.mini-qr-row button { border: 0; width: 39px; height: 39px; padding: 5px; border-radius: 8px; background: white; }
-.mini-qr-row i, .qr-placeholder i { display: block; width: 100%; height: 100%; background: repeating-conic-gradient(#080b18 0 8%, transparent 0 17%) 0 0/12px 12px; opacity: .85; }
+.mini-qr-row button { border: 1px solid rgba(255,255,255,.1); width: 39px; height: 39px; padding: 0; border-radius: 10px; background: rgba(255,255,255,.08); color: white; font-size: 11px; font-weight: 900; }
+.mini-qr-row button:hover { border-color: rgba(143, 126, 255, .65); background: rgba(112, 91, 235, .35); }
 .back-home { margin-top: 12px; padding: 8px 0; border: 0; background: transparent; color: #737c9d; font-size: 11px; text-align: left; }
 .library-main { grid-column: 2; width: 100%; max-width: 1320px; margin: 0 auto; padding: 52px 48px 80px; position: relative; z-index: 1; }
 .library-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 25px; }
@@ -145,7 +147,7 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .empty button { margin-top: 15px; padding: 10px 18px; border: 1px solid #7666dd; background: rgba(91, 70, 190, .35); border-radius: 11px; }
 .mobile-library-head, .mobile-categories { display: none; }
 
-.modal-backdrop { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 18px; background: rgba(1, 3, 10, .78); backdrop-filter: blur(10px); animation: fade .18s ease; }
+.modal-backdrop { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 18px; overflow-y: auto; background: rgba(1, 3, 10, .82); backdrop-filter: blur(10px); animation: fade .18s ease; }
 .tool-modal, .follow-modal { position: relative; width: min(500px, 100%); border: 1px solid rgba(126, 108, 255, .45); border-radius: 24px; padding: 30px; background: linear-gradient(145deg, #111631, #090d20); box-shadow: 0 30px 90px rgba(0,0,0,.55), 0 0 80px rgba(92, 61, 220, .14); animation: rise .22s ease; }
 .modal-close { position: absolute; right: 17px; top: 14px; border: 0; background: transparent; color: #7f88a6; font-size: 25px; }
 .modal-title { display: flex; align-items: center; gap: 15px; }
@@ -161,15 +163,24 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .modal-actions button, .modal-actions a { display: grid; place-items: center; height: 46px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 13px; }
 .modal-actions button { border: 1px solid rgba(118, 126, 179, .3); background: rgba(26, 31, 66, .7); }
 .modal-actions a { background: linear-gradient(135deg, #755dff, #5541db); color: white; }
-.follow-modal { width: min(720px, 100%); text-align: center; }
+.follow-modal { width: min(880px, 100%); max-height: calc(100vh - 36px); overflow-x: hidden; overflow-y: auto; text-align: center; }
 .follow-modal h2 { margin: 8px 0; }
 .follow-modal > p { color: #8c95b3; font-size: 12px; }
-.qr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 25px; }
-.qr-grid > div { padding: 14px; border: 1px solid var(--line); border-radius: 16px; background: rgba(18, 23, 50, .75); }
-.qr-placeholder { position: relative; aspect-ratio: 1; padding: 14px; border-radius: 11px; background: white; overflow: hidden; }
-.qr-placeholder span { position: absolute; z-index: 2; inset: 50% auto auto 50%; transform: translate(-50%,-50%); padding: 5px; background: white; color: #17172b; font-size: 10px; font-weight: 900; }
-.qr-grid b { display: block; margin-top: 11px; font-size: 13px; }
-.qr-grid small { color: #7c86a5; font-size: 9px; }
+.qr-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 25px; text-align: left; }
+.qr-card { min-width: 0; padding: 11px; display: grid; grid-template-columns: minmax(190px, 1.35fr) minmax(115px, .65fr); grid-template-rows: auto 1fr auto; gap: 9px 12px; border: 1px solid var(--line); border-radius: 17px; background: rgba(18, 23, 50, .82); }
+.qr-card-head { grid-column: 2; grid-row: 1; display: flex; align-items: center; gap: 9px; min-width: 0; min-height: 39px; }
+.qr-card-head > div { min-width: 0; }
+.qr-card-head > span { display: grid; place-items: center; flex: 0 0 auto; width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, #6552dd, #322968); color: white; font-size: 11px; font-weight: 900; }
+.qr-card.wechat .qr-card-head > span { background: linear-gradient(135deg, #20cf68, #079446); }
+.qr-card.douyin .qr-card-head > span { background: linear-gradient(135deg, #28eced, #fa2d61); }
+.qr-card.xiaohongshu .qr-card-head > span { background: linear-gradient(135deg, #ff3550, #b80d24); }
+.qr-card.bilibili .qr-card-head > span { background: linear-gradient(135deg, #52c8f0, #1685bf); }
+.qr-card-head b { display: block; font-size: 13px; }
+.qr-card-head small { display: block; max-width: 125px; margin-top: 3px; overflow: hidden; color: #828cac; font-size: 8px; white-space: nowrap; text-overflow: ellipsis; }
+.qr-image { grid-column: 1; grid-row: 1 / 4; display: block; width: 100%; min-height: 220px; padding: 0; overflow: hidden; border: 0; border-radius: 11px; background: white; }
+.qr-image img { display: block; width: 100%; height: 100%; object-fit: contain; background: white; }
+.qr-card > p { grid-column: 2; grid-row: 2; margin: 2px; color: #a7aec5; font-size: 9px; line-height: 1.55; }
+.qr-tip { grid-column: 2; grid-row: 3; display: block; margin: 0 2px; color: #676f90; font-size: 8px; }
 @keyframes fade { from { opacity: 0; } }
 @keyframes rise { from { opacity: 0; transform: translateY(15px) scale(.98); } }
 
@@ -206,8 +217,8 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
   .rank-card p { max-width: 190px; }
   .creator-strip { margin: 0 17px 50px; padding: 23px; display: block; text-align: center; }
   .creator-strip h2 { font-size: 21px; }
-  .creator-actions { margin-top: 20px; justify-content: center; }
-  .creator-actions button { width: 30%; max-width: 100px; height: 62px; font-size: 12px; }
+  .creator-actions { grid-template-columns: repeat(2, 1fr); margin-top: 20px; }
+  .creator-actions button { height: 62px; font-size: 12px; }
 
   .library-layout { display: block; }
   .sidebar { display: none; }
@@ -229,9 +240,13 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
   .card-main { padding: 15px; }
   .card-main p { font-size: 10.5px; }
   .tool-modal, .follow-modal { padding: 25px 20px 20px; border-radius: 20px; }
-  .qr-grid { gap: 7px; }
-  .qr-grid > div { padding: 7px; border-radius: 12px; }
-  .qr-placeholder { padding: 8px; }
+  .follow-modal { width: min(430px, 100%); max-height: calc(100vh - 24px); }
+  .qr-grid { grid-template-columns: 1fr; gap: 12px; }
+  .qr-card { padding: 12px; display: block; }
+  .qr-card-head { margin-bottom: 10px; }
+  .qr-card-head small { max-width: 260px; font-size: 9px; }
+  .qr-image { aspect-ratio: 1 / 1.05; }
+  .qr-card > p { min-height: 0; margin: 10px 2px 4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
