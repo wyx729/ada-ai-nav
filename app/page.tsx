@@ -72,13 +72,114 @@ const tools: Tool[] = [
   { name: "DeepLearning.AI", domain: "deeplearning.ai", category: "学习资源", desc: "吴恩达创办的 AI 课程与开发者学习平台。", tags: ["海外", "免费试用"] },
   { name: "Hugging Face", domain: "huggingface.co", category: "学习资源", desc: "全球开源模型、数据集与 AI 应用社区。", tags: ["海外", "免费"] },
   { name: "Learning Prompt", domain: "learningprompt.wiki", category: "学习资源", desc: "面向中文用户的免费提示工程学习教程。", tags: ["国产可用", "免费"] },
+  { name: "讯飞星火", domain: "xinghuo.xfyun.cn", category: "AI 对话", desc: "科大讯飞推出的认知智能大模型助手，支持搜索、写作与多模态问答。", tags: ["国产可用", "免费"] },
+  { name: "阿贝 AI", domain: "abeiai.com", category: "图像设计", desc: "面向中文创作者的 AI 绘画与视觉内容生成平台。", tags: ["国产可用", "免费试用"] },
+  { name: "绘蛙", domain: "ihuiwa.com", category: "图像设计", desc: "面向电商场景的 AI 模特图、商品图与营销文案创作工具。", tags: ["国产可用", "免费试用"] },
+  { name: "艾绘 AI", domain: "aiyou.art", category: "图像设计", desc: "提供 AI 绘画、模型与创作工作流的在线平台。", tags: ["国产可用", "免费试用"] },
+  { name: "MX 绘画", domain: "mxai.cn", category: "图像设计", desc: "支持文生图、图生图与风格创作的中文 AI 绘画平台。", tags: ["国产可用", "免费试用"] },
+  { name: "图星人", domain: "tuxingren.com", category: "图像设计", desc: "集 AI 商品图、抠图、换背景与营销设计于一体。", tags: ["国产可用", "免费试用"] },
+  { name: "LinkFox AI", domain: "ai.linkfox.com", category: "图像设计", desc: "跨境电商 AI 图片与营销内容生成工具。", tags: ["国产可用", "免费试用"] },
+  { name: "OpenFlow", domain: "openflowai.net", category: "图像设计", desc: "在线使用生成模型与节点工作流的 AI 创作平台。", tags: ["国产可用", "免费试用"] },
+  { name: "千问创作", domain: "create.qianwen.com", category: "图像设计", desc: "通义千问提供的 AI 图片与创意内容生成空间。", tags: ["国产可用", "免费"] },
+  { name: "包图 AI", domain: "ibaotu.com", category: "图像设计", desc: "面向设计、电商与营销场景的 AI 图片创作工具。", tags: ["国产可用", "免费试用"] },
+  { name: "Holopix AI", domain: "holopix.cn", category: "图像设计", desc: "面向游戏美术与视觉资产生产的 AI 创作平台。", tags: ["国产可用", "免费试用"] },
+  { name: "吐司 AI", domain: "tusi.cn", category: "图像设计", desc: "国内 AI 绘画模型、作品与在线生成社区。", tags: ["国产可用", "免费试用"] },
+  { name: "触手 AI", domain: "acgnai.art", category: "图像设计", desc: "专注插画、动漫与二次元风格的 AI 绘画平台。", tags: ["国产可用", "免费试用"] },
+  { name: "RunningHub", domain: "runninghub.cn", category: "图像设计", desc: "在线运行与分享 ComfyUI 工作流的 AI 创作平台。", tags: ["国产可用", "免费试用"] },
+  { name: "海艺 AI", domain: "haiyi.art", category: "图像设计", desc: "提供模型、工作流与在线生成能力的 AI 艺术社区。", tags: ["国产可用", "免费试用"] },
+  { name: "Niji Journey", domain: "nijijourney.com", category: "图像设计", desc: "专注动漫和插画风格的 AI 图像生成工具。", tags: ["海外", "付费"] },
+  { name: "秒画", domain: "miaohua.sensetime.com", category: "图像设计", desc: "商汤科技推出的 AI 绘画与创意生成平台。", tags: ["国产可用", "免费试用"] },
+  { name: "Clipdrop", domain: "clipdrop.co", category: "图像设计", desc: "提供抠图、扩图、清理和生成式编辑的一站式图像工具。", tags: ["海外", "免费试用"] },
+  { name: "AniShort", domain: "anishort.cn", category: "视频创作", desc: "用 AI 快速生成动漫短剧与分镜内容。", tags: ["国产可用", "免费试用"] },
+  { name: "有言", domain: "youyan3d.com", category: "视频创作", desc: "一站式 AI 数字人视频与 3D 内容创作平台。", tags: ["国产可用", "免费试用"] },
+  { name: "闪剪", domain: "shanjian.tv", category: "视频创作", desc: "面向口播、营销与短视频场景的 AI 数字人创作工具。", tags: ["国产可用", "免费试用"] },
+  { name: "WonderClip", domain: "yikeai.com", category: "视频创作", desc: "自动完成文案、素材与剪辑的 AI 视频创作平台。", tags: ["国产可用", "免费试用"] },
+  { name: "OiiOii", domain: "oiioii.tv", category: "视频创作", desc: "面向动画与视觉叙事的 AI 视频生成平台。", tags: ["国产可用", "免费试用"] },
+  { name: "腾讯混元视频", domain: "video.hunyuan.tencent.com", category: "视频创作", desc: "腾讯混元提供的文本和图片生成视频能力。", tags: ["国产可用", "免费试用"] },
+  { name: "ZeroCut", domain: "zerocut.cn", category: "视频创作", desc: "自动成片、智能剪辑与短视频批量生产工具。", tags: ["国产可用", "免费试用"] },
+  { name: "X·FUN", domain: "xfun.design", category: "写作办公", desc: "融合 AI 生成与灵感管理的创意效率工具。", tags: ["国产可用", "免费试用"] },
+  { name: "MonkeyCode", domain: "monkeycode-ai.com", category: "AI 编程", desc: "面向产品与开发场景的 AI 编程和应用构建助手。", tags: ["国产可用", "免费试用"] },
+  { name: "iSlide", domain: "islide.cc", category: "写作办公", desc: "集模板、设计与 AI 生成为一体的 PPT 效率工具。", tags: ["国产可用", "免费试用"] },
+  { name: "蛙蛙写作", domain: "wawawriter.com", category: "写作办公", desc: "小说、故事与长文本创作的 AI 写作助手。", tags: ["国产可用", "免费试用"] },
+  { name: "笔灵 AI", domain: "ibiling.cn", category: "写作办公", desc: "覆盖公文、论文、营销与新媒体场景的中文 AI 写作工具。", tags: ["国产可用", "免费试用"] },
+  { name: "讯飞绘文", domain: "turbodesk.xfyun.cn", category: "写作办公", desc: "科大讯飞推出的新媒体选题、写作与排版助手。", tags: ["国产可用", "免费试用"] },
+  { name: "FeelFish", domain: "feelfish.com", category: "写作办公", desc: "面向跨境电商的 AI 商品内容与营销文案工具。", tags: ["国产可用", "免费试用"] },
+  { name: "66 论文", domain: "66paper.cn", category: "写作办公", desc: "提供论文选题、结构与写作辅助的 AI 学术工具。", tags: ["国产可用", "付费"] },
+  { name: "千笔 AI 论文", domain: "qianbixiezuo.com", category: "写作办公", desc: "面向中文论文场景的结构生成与写作辅助平台。", tags: ["国产可用", "付费"] },
+  { name: "Aibiye", domain: "aibiye.com", category: "写作办公", desc: "毕业论文、开题报告与文献写作辅助工具。", tags: ["国产可用", "付费"] },
+  { name: "PaperFake", domain: "paperfake.cn", category: "写作办公", desc: "论文检测、降重与学术写作辅助平台。", tags: ["国产可用", "付费"] },
+  { name: "万能小 in", domain: "xiaoin.com.cn", category: "写作办公", desc: "面向办公场景的文档阅读、总结与内容生成助手。", tags: ["国产可用", "免费试用"] },
+  { name: "MedPeer", domain: "medpeer.cn", category: "写作办公", desc: "服务医学研究者的文献、科研与学术写作平台。", tags: ["国产可用", "免费试用"] },
+  { name: "小鱼 AI 写作", domain: "xiaoyuxiezuo.com", category: "写作办公", desc: "覆盖文章、公文与营销内容的中文 AI 写作工具。", tags: ["国产可用", "免费试用"] },
+  { name: "慧言 AI", domain: "aigc.huiyan-ai.cn", category: "写作办公", desc: "提供内容创作、改写与办公文案生成服务。", tags: ["国产可用", "免费试用"] },
+  { name: "摄图 AI", domain: "ai.699pic.com", category: "图像设计", desc: "摄图网推出的 AI 图片、设计与营销素材创作平台。", tags: ["国产可用", "免费试用"] },
+  { name: "AI 内容管家", domain: "guanjia.seowhy.com", category: "写作办公", desc: "面向网站运营和 SEO 场景的 AI 内容生产工具。", tags: ["国产可用", "免费试用"] },
+  { name: "小橡皮 AI", domain: "xiangpiai.cn", category: "写作办公", desc: "中文内容生成、润色与多场景写作助手。", tags: ["国产可用", "免费试用"] },
+  { name: "橙篇", domain: "cp.baidu.com", category: "写作办公", desc: "百度推出的长文理解、研究与内容创作工具。", tags: ["国产可用", "免费"] },
+  { name: "Postme", domain: "postme.cn", category: "写作办公", desc: "面向自媒体与社交平台的 AI 内容创作和发布工具。", tags: ["国产可用", "免费试用"] },
+  { name: "有道写作", domain: "write.youdao.com", category: "写作办公", desc: "网易有道提供的英文写作批改、润色与表达建议工具。", tags: ["国产可用", "免费"] },
+  { name: "百度文库 AI", domain: "wenku.baidu.com", category: "写作办公", desc: "支持文档总结、内容生成、PPT 与资料检索的办公助手。", tags: ["国产可用", "免费试用"] },
+  { name: "博思 AIPPT", domain: "pptgo.cn", category: "写作办公", desc: "输入主题即可生成大纲、设计和完整演示文稿。", tags: ["国产可用", "免费试用"] },
+  { name: "ChatPPT", domain: "chatppt.cn", category: "写作办公", desc: "对话式生成和修改中文演示文稿。", tags: ["国产可用", "免费试用"] },
+  { name: "咔片 PPT", domain: "cappt.cc", category: "写作办公", desc: "自动生成内容结构与视觉版式的 AI PPT 工具。", tags: ["国产可用", "免费试用"] },
+  { name: "办公小浣熊", domain: "xiaohuanxiong.com", category: "写作办公", desc: "商汤推出的表格分析、文档处理与办公智能助手。", tags: ["国产可用", "免费试用"] },
+  { name: "笔格 AIPPT", domain: "bigppt.cn", category: "写作办公", desc: "中文 AI PPT 生成、模板匹配与在线编辑平台。", tags: ["国产可用", "免费试用"] },
+  { name: "Pi 智能演示", domain: "pi.deepvinci.tech", category: "写作办公", desc: "面向商业表达的 AI 演示文稿生成工具。", tags: ["国产可用", "免费试用"] },
+  { name: "二狗 AI PPT", domain: "2dogppt.com", category: "写作办公", desc: "从主题或文档快速生成中文 PPT。", tags: ["国产可用", "免费试用"] },
+  { name: "迅捷 AIPPT", domain: "xunjieppt.com", category: "写作办公", desc: "支持多种模板与场景的一键 AI 演示生成工具。", tags: ["国产可用", "免费试用"] },
+  { name: "课灵 PPT", domain: "classppt.cn", category: "写作办公", desc: "面向教师与教学场景的 AI 课件生成平台。", tags: ["国产可用", "免费试用"] },
+  { name: "讯飞智文", domain: "zhiwen.xfyun.cn", category: "写作办公", desc: "科大讯飞推出的 AI 文档与演示生成工具。", tags: ["国产可用", "免费试用"] },
+  { name: "PPT 百科", domain: "pptwiki.com", category: "写作办公", desc: "集 AI 生成、模板与演示设计资源于一体。", tags: ["国产可用", "免费试用"] },
+  { name: "MotionGo", domain: "motion.yoo-ai.com", category: "写作办公", desc: "用 AI 为 PPT 自动生成动画与演示效果。", tags: ["国产可用", "免费试用"] },
+  { name: "GitMind", domain: "gitmind.cn", category: "写作办公", desc: "AI 驱动的思维导图、流程图与知识整理工具。", tags: ["国产可用", "免费试用"] },
+  { name: "万兴 PDF", domain: "pdf.wondershare.cn", category: "写作办公", desc: "集 AI 阅读、总结、翻译与 PDF 编辑于一体。", tags: ["国产可用", "免费试用"] },
+  { name: "萝卜简历", domain: "luobojianli.com", category: "写作办公", desc: "AI 简历生成、优化与求职内容辅助工具。", tags: ["国产可用", "免费试用"] },
+  { name: "秒哒", domain: "miaoda.cn", category: "AI 编程", desc: "百度推出的无代码 AI 应用搭建平台。", tags: ["国产可用", "免费试用"] },
+  { name: "CodeGeeX", domain: "codegeex.cn", category: "AI 编程", desc: "智谱推出的代码生成、补全、解释与智能体编程助手。", tags: ["国产可用", "免费"] },
+  { name: "Windsurf", domain: "windsurf.com", category: "AI 编程", desc: "面向智能体式开发的 AI 原生代码编辑器。", tags: ["海外", "免费试用"] },
+  { name: "Amazon Q Developer", domain: "aws.amazon.com/q/developer", category: "AI 编程", desc: "AWS 提供的代码生成、调试和云开发智能助手。", tags: ["海外", "免费试用"] },
+  { name: "即时 AI", domain: "js.design", category: "AI 编程", desc: "即时设计推出的 AI 原型、网页与界面生成能力。", tags: ["国产可用", "免费试用"] },
+  { name: "DuMate", domain: "dumate.cn", category: "智能体", desc: "面向团队业务场景的企业级 AI 智能体平台。", tags: ["国产可用", "免费试用"] },
+  { name: "WorkBuddy", domain: "workbuddy.cn", category: "智能体", desc: "可连接知识与工作流程的 AI 办公智能体。", tags: ["国产可用", "免费试用"] },
+  { name: "Marvis", domain: "marvis.qq.com", category: "智能体", desc: "腾讯推出的个人智能体与任务协作助手。", tags: ["国产可用", "免费试用"] },
+  { name: "LobsterAI", domain: "lobsterai.youdao.com", category: "智能体", desc: "网易有道推出的桌面 AI 智能体与效率助手。", tags: ["国产可用", "免费试用"] },
+  { name: "国家智慧教育平台", domain: "smartedu.cn", category: "学习资源", desc: "国家级数字教育资源与课程公共服务平台。", tags: ["国产可用", "免费"] },
+  { name: "国家终身教育平台", domain: "le.ouchn.cn", category: "学习资源", desc: "面向全民终身学习的免费数字课程平台。", tags: ["国产可用", "免费"] },
+  { name: "Day of AI", domain: "dayofai.org", category: "学习资源", desc: "面向师生的免费人工智能课程与教学资源。", tags: ["海外", "免费"] },
+  { name: "PromptHero", domain: "prompthero.com", category: "学习资源", desc: "搜索和学习主流生成式 AI 提示词的社区平台。", tags: ["海外", "免费"] },
+  { name: "Prompt Engineering Guide", domain: "promptingguide.ai", category: "学习资源", desc: "系统学习提示工程、模型能力与实践方法的开放教程。", tags: ["海外", "免费"] },
+  { name: "Prompt123", domain: "prompt123.cn", category: "学习资源", desc: "中文 AI 提示词导航、案例与学习社区。", tags: ["国产可用", "免费"] },
+  { name: "Papers With Code", domain: "paperswithcode.com", category: "学习资源", desc: "连接机器学习论文、代码实现和评测数据的平台。", tags: ["海外", "免费"] },
+  { name: "机器之心", domain: "jiqizhixin.com", category: "学习资源", desc: "人工智能产业、研究与技术内容平台。", tags: ["国产可用", "免费"] },
+  { name: "量子位", domain: "qbitai.com", category: "学习资源", desc: "聚焦人工智能前沿、产品与产业动态的内容平台。", tags: ["国产可用", "免费"] },
+  { name: "飞桨", domain: "paddlepaddle.org.cn", category: "学习资源", desc: "百度开源深度学习平台与开发者学习资源。", tags: ["国产可用", "开源"] },
+  { name: "动手学深度学习", domain: "zh.d2l.ai", category: "学习资源", desc: "可运行代码、数学与实践结合的免费深度学习教材。", tags: ["国产可用", "免费"] },
+  { name: "OpenBayes", domain: "openbayes.com", category: "学习资源", desc: "面向 AI 开发者的算力、数据与模型实践平台。", tags: ["国产可用", "免费试用"] },
+  { name: "EasyAI", domain: "easyai.tech", category: "学习资源", desc: "面向初学者的人工智能知识库与教程。", tags: ["国产可用", "免费"] },
 ];
 
 const trendNames = ["DeepSeek", "即梦 AI", "豆包", "Trae"];
 
 function logoUrl(domain: string) {
   const clean = domain.split("/")[0];
-  return `https://www.google.com/s2/favicons?domain=${clean}&sz=128`;
+  return `https://www.google.com/s2/favicons?domain_url=https://${clean}&sz=128`;
+}
+
+function ToolLogo({ tool }: { tool: Tool }) {
+  const [failed, setFailed] = useState(false);
+  return (
+    <span className="tool-logo">
+      {!failed && (
+        <img
+          src={logoUrl(tool.domain)}
+          alt={`${tool.name} logo`}
+          referrerPolicy="no-referrer"
+          onError={() => setFailed(true)}
+        />
+      )}
+      {failed && <b aria-hidden="true">{tool.name.replace(/\s/g, "").slice(0, 2)}</b>}
+    </span>
+  );
 }
 
 export default function Home() {
@@ -152,7 +253,7 @@ export default function Home() {
           </header>
 
           <section className="hero">
-            <div className="hero-badge"><span /> 已收录 500+ AI 工具 · 持续更新</div>
+            <div className="hero-badge"><span /> 已收录 {tools.length} 款 AI 工具 · 持续更新</div>
             <h1>探索 AI 的<br /><span>无限可能</span></h1>
             <p>从海量 AI 工具中，发现真正适合你的下一代生产力。</p>
             <form
@@ -186,7 +287,7 @@ export default function Home() {
                 return (
                   <article className="rank-card" key={name} onClick={() => setSelected(tool)}>
                     <span className="rank-number">0{index + 1}</span>
-                    <img src={logoUrl(tool.domain)} alt={`${tool.name} logo`} />
+                    <ToolLogo tool={tool} />
                     <div><h3>{tool.name}</h3><p>{tool.desc}</p></div>
                     <span className="card-arrow">↗</span>
                   </article>
@@ -253,7 +354,7 @@ export default function Home() {
               {filteredTools.map((tool) => (
                 <article className="tool-card" key={tool.name}>
                   <button className="card-main" onClick={() => setSelected(tool)}>
-                    <img src={logoUrl(tool.domain)} alt={`${tool.name} logo`} />
+                    <ToolLogo tool={tool} />
                     <div><h2>{tool.name}{tool.badge && <em>{tool.badge}</em>}</h2><p>{tool.desc}</p></div>
                   </button>
                   <div className="card-bottom">
@@ -273,7 +374,7 @@ export default function Home() {
         <div className="modal-backdrop" onMouseDown={() => setSelected(null)}>
           <section className="tool-modal" onMouseDown={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
             <button className="modal-close" onClick={() => setSelected(null)}>×</button>
-            <div className="modal-title"><img src={logoUrl(selected.domain)} alt="" /><div><small>{selected.category}</small><h2>{selected.name}</h2></div></div>
+            <div className="modal-title"><ToolLogo tool={selected} /><div><small>{selected.category}</small><h2>{selected.name}</h2></div></div>
             <p>{selected.desc}</p>
             <div className="modal-tags">{selected.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
             <div className="modal-note"><b>访问提示</b><p>即将前往该工具官方网站。第三方服务的可用性、价格和地区限制可能发生变化。</p></div>

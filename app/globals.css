@@ -84,7 +84,9 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .rank-card { min-width: 0; display: grid; grid-template-columns: 48px 52px 1fr 24px; gap: 15px; align-items: center; padding: 19px; border: 1px solid var(--line); border-radius: 18px; background: rgba(12, 16, 36, .86); transition: .2s ease; }
 .rank-card:hover { border-color: rgba(116, 96, 255, .7); transform: translateY(-2px); background: rgba(20, 23, 50, .95); }
 .rank-number { color: #8576f6; font-size: 20px; font-weight: 800; }
-.rank-card img { width: 50px; height: 50px; object-fit: contain; border-radius: 13px; background: white; padding: 5px; }
+.tool-logo { display: grid; place-items: center; flex: 0 0 auto; width: 50px; height: 50px; overflow: hidden; border: 1px solid rgba(133, 119, 255, .2); border-radius: 13px; background: linear-gradient(145deg, #fff, #e9edff); box-shadow: inset 0 0 0 1px rgba(255,255,255,.45); }
+.tool-logo img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+.tool-logo b { color: #5741d8; font-size: 14px; font-weight: 900; letter-spacing: -1px; }
 .rank-card h3 { margin: 0 0 5px; font-size: 16px; }
 .rank-card p { margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #858daa; font-size: 12px; }
 .card-arrow { color: #9f93f8; font-size: 19px; }
@@ -127,7 +129,7 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .tool-card { min-width: 0; border: 1px solid var(--line); background: rgba(12, 16, 37, .86); border-radius: 17px; overflow: hidden; transition: .2s ease; }
 .tool-card:hover { border-color: rgba(120, 103, 244, .6); transform: translateY(-2px); box-shadow: 0 15px 38px rgba(0,0,0,.22); }
 .card-main { width: 100%; padding: 17px; display: grid; grid-template-columns: 50px 1fr; gap: 13px; border: 0; background: transparent; text-align: left; }
-.card-main img { width: 50px; height: 50px; object-fit: contain; padding: 5px; background: white; border-radius: 13px; }
+.card-main .tool-logo { width: 50px; height: 50px; }
 .card-main h2 { margin: 2px 0 7px; font-size: 15px; }
 .card-main h2 em { margin-left: 6px; padding: 3px 6px; border-radius: 7px; background: rgba(103, 80, 220, .35); color: #b9adff; font-size: 8px; font-style: normal; vertical-align: 2px; }
 .card-main p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 0; color: #838cab; font-size: 11px; line-height: 1.55; }
@@ -147,7 +149,7 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .tool-modal, .follow-modal { position: relative; width: min(500px, 100%); border: 1px solid rgba(126, 108, 255, .45); border-radius: 24px; padding: 30px; background: linear-gradient(145deg, #111631, #090d20); box-shadow: 0 30px 90px rgba(0,0,0,.55), 0 0 80px rgba(92, 61, 220, .14); animation: rise .22s ease; }
 .modal-close { position: absolute; right: 17px; top: 14px; border: 0; background: transparent; color: #7f88a6; font-size: 25px; }
 .modal-title { display: flex; align-items: center; gap: 15px; }
-.modal-title img { width: 62px; height: 62px; padding: 7px; object-fit: contain; background: white; border-radius: 16px; }
+.modal-title .tool-logo { width: 62px; height: 62px; border-radius: 16px; }
 .modal-title small { color: #8173eb; font-size: 10px; }
 .modal-title h2 { margin: 5px 0 0; font-size: 25px; }
 .tool-modal > p { color: #a0a8c4; font-size: 14px; line-height: 1.7; margin: 22px 0 15px; }
@@ -200,7 +202,7 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
   .section-heading > button { font-size: 10px; }
   .ranking-grid { grid-template-columns: 1fr; gap: 10px; }
   .rank-card { grid-template-columns: 35px 45px 1fr 20px; padding: 14px; gap: 11px; }
-  .rank-card img { width: 44px; height: 44px; }
+  .rank-card .tool-logo { width: 44px; height: 44px; }
   .rank-card p { max-width: 190px; }
   .creator-strip { margin: 0 17px 50px; padding: 23px; display: block; text-align: center; }
   .creator-strip h2 { font-size: 21px; }
