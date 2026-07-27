@@ -23,6 +23,8 @@ const categories = [
   ["学习资源", "◎"],
 ] as const;
 
+type CategoryName = (typeof categories)[number][0];
+
 const tools: Tool[] = [
   { name: "豆包", domain: "doubao.com", category: "AI 对话", desc: "字节跳动推出的全能 AI 助手，支持对话、写作、图像与深度思考。", tags: ["国产可用", "免费"], badge: "热门" },
   { name: "DeepSeek", domain: "deepseek.com", category: "AI 对话", desc: "擅长推理、代码与知识问答的国产大模型助手。", tags: ["国产可用", "免费"], badge: "热门" },
@@ -195,6 +197,120 @@ const contacts = [
   },
 ] as const;
 
+const intentDefinitions = [
+  {
+    category: "视频创作",
+    keywords: ["生成短视频", "短视频", "文生视频", "图生视频", "视频生成", "视频制作", "视频剪辑", "剪视频", "数字人", "口播", "动画", "分镜", "字幕", "视频翻译", "做视频"],
+  },
+  {
+    category: "图像设计",
+    keywords: ["生成图片", "图片生成", "画图", "绘画", "海报", "商品图", "模特图", "换背景", "抠图", "扩图", "修图", "去水印", "头像", "插画", "动漫图", "设计图片", "做图"],
+  },
+  {
+    category: "写作办公",
+    keywords: ["写文章", "写文案", "写作", "做ppt", "生成ppt", "演示文稿", "论文", "开题报告", "简历", "公文", "文档", "表格", "excel", "会议纪要", "总结文档", "润色", "改写", "降重", "翻译文章"],
+  },
+  {
+    category: "AI 编程",
+    keywords: ["写代码", "编程", "代码", "开发网站", "做网站", "开发app", "做app", "开发应用", "程序", "debug", "调试", "ide", "前端", "后端", "网页开发"],
+  },
+  {
+    category: "智能体",
+    keywords: ["智能体", "agent", "工作流", "知识库", "机器人", "自动化任务", "搭建助手", "企业助手", "bot"],
+  },
+  {
+    category: "音乐语音",
+    keywords: ["配音", "生成音乐", "写歌", "作曲", "音乐", "歌曲", "声音克隆", "语音合成", "人声", "音频", "朗读", "唱歌"],
+  },
+  {
+    category: "学习资源",
+    keywords: ["学习ai", "学ai", "ai课程", "人工智能课程", "提示词", "prompt", "教程", "论文代码", "深度学习", "机器学习", "模型社区", "开源模型"],
+  },
+  {
+    category: "AI 对话",
+    keywords: ["聊天", "问答", "ai搜索", "搜索资料", "查资料", "研究", "总结", "长文本", "大模型", "翻译", "分析文件", "回答问题", "对话"],
+  },
+] as const satisfies ReadonlyArray<{ category: Exclude<CategoryName, "全部工具">; keywords: readonly string[] }>;
+
+type SearchResolution =
+  | { mode: "none"; category: "全部工具"; terms: string[] }
+  | { mode: "direct" | "intent"; category: CategoryName; terms: string[] };
+
+function normalizeSearchText(value: string) {
+  return value.toLowerCase().replace(/[\s·、，。！？,.!?：:；;（）()【】[\]_-]/g, "");
+}
+
+function resolveSearch(value: string): SearchResolution {
+  const keyword = normalizeSearchText(value);
+  if (!keyword) return { mode: "none", category: "全部工具", terms: [] };
+
+  const exactTools = tools.filter((tool) => normalizeSearchText(tool.name) === keyword);
+  if (exactTools.length) {
+    return { mode: "direct", category: exactTools[0].category as CategoryName, terms: [keyword] };
+  }
+
+  if (keyword.length >= 3) {
+    const partialTools = tools.filter((tool) => normalizeSearchText(tool.name).includes(keyword));
+    if (partialTools.length) {
+      return { mode: "direct", category: partialTools[0].category as CategoryName, terms: [keyword] };
+    }
+  }
+
+  const intentMatches = intentDefinitions
+    .map((intent) => {
+      const terms = intent.keywords
+        .map(normalizeSearchText)
+        .filter((term) => keyword.includes(term) || (term.length >= 2 && term.includes(keyword)));
+      const score = terms.reduce((total, term) => total + term.length * term.length, 0);
+      return { ...intent, terms, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  if (intentMatches.length) {
+    return {
+      mode: "intent",
+      category: intentMatches[0].category,
+      terms: intentMatches[0].terms,
+    };
+  }
+
+  const textMatches = tools.filter((tool) =>
+    normalizeSearchText([tool.name, tool.desc, tool.category, ...tool.tags].join(" ")).includes(keyword),
+  );
+  if (textMatches.length) {
+    const matchedCategories = [...new Set(textMatches.map((tool) => tool.category))];
+    return {
+      mode: "direct",
+      category: matchedCategories.length === 1 ? matchedCategories[0] as CategoryName : "全部工具",
+      terms: [keyword],
+    };
+  }
+
+  return { mode: "none", category: "全部工具", terms: [] };
+}
+
+function searchScore(tool: Tool, rawQuery: string, resolution: SearchResolution) {
+  if (!rawQuery || resolution.mode === "none") return 0;
+  const keyword = normalizeSearchText(rawQuery);
+  const coreKeyword = keyword.replace(/^(我想|我要|帮我|请帮我|如何|怎么)?(生成|制作|做|写|开发|学习|查找|查|找)/, "");
+  const name = normalizeSearchText(tool.name);
+  const content = normalizeSearchText([tool.name, tool.desc, tool.category, ...tool.tags].join(" "));
+  let score = tool.category === resolution.category ? 30 : 0;
+  if (name === keyword) score += 200;
+  else if (name.includes(keyword)) score += 120;
+  if (content.includes(keyword)) score += 55;
+  if (coreKeyword.length >= 2 && name.includes(coreKeyword)) score += 90;
+  else if (coreKeyword.length >= 2 && content.includes(coreKeyword)) score += 60;
+  resolution.terms.forEach((term) => {
+    if (name.includes(term)) score += 45;
+    if (content.includes(term)) score += 24;
+  });
+  if (tool.badge === "热门") score += 8;
+  if (tool.badge === "精选") score += 5;
+  return score;
+}
+
 function logoUrl(domain: string) {
   const clean = domain.split("/")[0];
   return `https://www.google.com/s2/favicons?domain_url=https://${clean}&sz=128`;
@@ -221,6 +337,8 @@ export default function Home() {
   const [view, setView] = useState<"home" | "library">("home");
   const [category, setCategory] = useState("全部工具");
   const [query, setQuery] = useState("");
+  const [activeQuery, setActiveQuery] = useState("");
+  const [searchNotice, setSearchNotice] = useState("");
   const [filter, setFilter] = useState("全部");
   const [selected, setSelected] = useState<Tool | null>(null);
   const [followOpen, setFollowOpen] = useState(false);
@@ -240,16 +358,19 @@ export default function Home() {
     localStorage.setItem("ada-ai-favorites", JSON.stringify(next));
   }
 
+  const searchResolution = useMemo(() => resolveSearch(activeQuery), [activeQuery]);
+
   const filteredTools = useMemo(() => {
-    const keyword = query.trim().toLowerCase();
-    return tools.filter((tool) => {
+    const normalizedActiveQuery = normalizeSearchText(activeQuery);
+    const hasExactToolMatch = Boolean(activeQuery) &&
+      tools.some((tool) => normalizeSearchText(tool.name) === normalizedActiveQuery);
+    const result = tools.filter((tool) => {
       const categoryMatch = category === "全部工具" || tool.category === category;
-      const queryMatch =
-        !keyword ||
-        [tool.name, tool.desc, tool.category, ...tool.tags]
-          .join(" ")
-          .toLowerCase()
-          .includes(keyword);
+      const queryMatch = !activeQuery || searchResolution.mode === "intent" ||
+        (hasExactToolMatch
+          ? normalizeSearchText(tool.name) === normalizedActiveQuery
+          : normalizeSearchText([tool.name, tool.desc, tool.category, ...tool.tags].join(" "))
+            .includes(normalizedActiveQuery));
       const filterMatch =
         filter === "全部" ||
         (filter === "收藏" && favorites.includes(tool.name)) ||
@@ -257,13 +378,72 @@ export default function Home() {
         tool.badge === filter;
       return categoryMatch && queryMatch && filterMatch;
     });
-  }, [category, query, filter, favorites]);
+    return result.sort(
+      (a, b) => searchScore(b, activeQuery, searchResolution) - searchScore(a, activeQuery, searchResolution),
+    );
+  }, [category, activeQuery, searchResolution, filter, favorites]);
 
-  function enterLibrary(nextCategory = "全部工具") {
+  function resetSearch(nextCategory: CategoryName = "全部工具") {
+    setQuery("");
+    setActiveQuery("");
+    setSearchNotice("");
+    setFilter("全部");
     setCategory(nextCategory);
+  }
+
+  function selectCategory(nextCategory: CategoryName) {
+    resetSearch(nextCategory);
+  }
+
+  function applySearch(value: string) {
+    const trimmed = value.trim();
+    if (!trimmed) {
+      resetSearch("全部工具");
+      return false;
+    }
+    const resolution = resolveSearch(trimmed);
+    if (resolution.mode === "none") {
+      setQuery("");
+      setActiveQuery("");
+      setCategory("全部工具");
+      setFilter("全部");
+      setSearchNotice(`暂未识别“${trimmed}”，已为你展示全部 AI 工具`);
+      return false;
+    }
+    setQuery(trimmed);
+    setActiveQuery(trimmed);
+    setCategory(resolution.category);
+    setFilter("全部");
+    setSearchNotice(
+      resolution.mode === "direct"
+        ? `已找到与“${trimmed}”相关的 AI 工具`
+        : `已为你定位到「${resolution.category}」，并按相关性推荐工具`,
+    );
+    return true;
+  }
+
+  function enterLibrary(nextCategory: CategoryName = "全部工具") {
+    resetSearch(nextCategory);
     setView("library");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
+
+  useEffect(() => {
+    if (view !== "library") return;
+    const trimmed = query.trim();
+    if (!trimmed) {
+      if (activeQuery) {
+        setActiveQuery("");
+        setCategory("全部工具");
+        setFilter("全部");
+      }
+      return;
+    }
+    if (trimmed === activeQuery) return;
+    setSearchNotice("");
+    const timer = window.setTimeout(() => applySearch(trimmed), 450);
+    return () => window.clearTimeout(timer);
+  }, [query, activeQuery, view]);
 
   return (
     <main>
@@ -295,7 +475,9 @@ export default function Home() {
               className="hero-search"
               onSubmit={(event) => {
                 event.preventDefault();
-                enterLibrary();
+                applySearch(query);
+                setView("library");
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
               <span className="search-icon">⌕</span>
@@ -355,7 +537,7 @@ export default function Home() {
             <p className="side-label">发现</p>
             <nav className="side-nav" aria-label="工具分类">
               {categories.map(([name, icon]) => (
-                <button key={name} className={category === name ? "active" : ""} onClick={() => setCategory(name)}>
+                <button key={name} className={category === name ? "active" : ""} onClick={() => selectCategory(name)}>
                   <span>{icon}</span>{name}<i>{name === "全部工具" ? tools.length : tools.filter((tool) => tool.category === name).length}</i>
                 </button>
               ))}
@@ -384,11 +566,28 @@ export default function Home() {
             </div>
             <div className="library-search">
               <span>⌕</span>
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="搜索工具、能力或使用场景…" />
-              {query && <button onClick={() => setQuery("")}>×</button>}
+              <input
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSearchNotice("");
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") applySearch(query);
+                }}
+                placeholder="搜索工具、能力或使用场景…"
+              />
+              {query && <button onClick={() => resetSearch("全部工具")} aria-label="清除搜索">×</button>}
             </div>
+            {searchNotice && (
+              <div className={`search-feedback ${activeQuery ? "matched" : "fallback"}`} role="status">
+                <span>{activeQuery ? "✦" : "ℹ"}</span>
+                <p>{searchNotice}</p>
+                <button onClick={() => resetSearch("全部工具")}>查看全部工具</button>
+              </div>
+            )}
             <div className="mobile-categories">
-              {categories.map(([name]) => <button key={name} className={category === name ? "active" : ""} onClick={() => setCategory(name)}>{name}</button>)}
+              {categories.map(([name]) => <button key={name} className={category === name ? "active" : ""} onClick={() => selectCategory(name)}>{name}</button>)}
             </div>
             <div className="filters">
               {["全部", "国产可用", "免费", "免费试用", "热门", "收藏"].map((name) => (
@@ -410,7 +609,7 @@ export default function Home() {
                 </article>
               ))}
             </div>
-            {!filteredTools.length && <div className="empty"><span>⌕</span><h2>没有找到匹配工具</h2><p>换个关键词或清除筛选后再试试。</p><button onClick={() => {setQuery("");setFilter("全部");setCategory("全部工具");}}>查看全部工具</button></div>}
+            {!filteredTools.length && <div className="empty"><span>⌕</span><h2>当前筛选下没有工具</h2><p>搜索内容不会阻止你继续浏览，可以随时返回全部工具。</p><button onClick={() => resetSearch("全部工具")}>查看全部工具</button></div>}
           </section>
         </div>
       )}
