@@ -333,8 +333,127 @@ function ToolLogo({ tool }: { tool: Tool }) {
   );
 }
 
+type View = "home" | "library" | "advisor" | "resources" | "lab" | "vibe" | "about";
+
+const mainNav: Array<{ view: View; label: string }> = [
+  { view: "home", label: "首页" },
+  { view: "library", label: "AI 工具库" },
+  { view: "advisor", label: "AI 帮我选" },
+  { view: "resources", label: "学习资源" },
+  { view: "lab", label: "我的 AI 实验室" },
+  { view: "vibe", label: "Vibe Coding 大赏" },
+];
+
+const resourceGroups = [
+  { title: "推荐学习路径", icon: "✦", desc: "按阶段完成从会用 AI 到做出产品的完整升级。", featured: true },
+  { title: "AI 入门", icon: "01", desc: "从真实任务出发，掌握对话、提示词和基础工具。"},
+  { title: "AI 提效", icon: "02", desc: "把文档、资料、会议和重复工作交给 AI。"},
+  { title: "AI 编程与产品开发", icon: "03", desc: "借助 AI 把想法做成网站、应用和可用产品。"},
+  { title: "Agent 与工作流", icon: "04", desc: "连接工具、知识库与流程，让 AI 连续完成任务。"},
+  { title: "AI 产品与商业化", icon: "05", desc: "从需求、产品验证到获客和可持续变现。"},
+];
+
+const realms = [
+  ["水", "贵船神社", "水显影"],
+  ["鱼", "川越冰川神社", "钓鱼签"],
+  ["晴", "气象神社", "晴天娃娃签"],
+  ["恋", "布忍神社", "当代恋爱文字签"],
+  ["缘", "安井金比罗宫", "切缘与结缘"],
+  ["珏", "台北龙山寺", "筊杯确认式求签"],
+  ["诗", "黄大仙祠", "签诗与职业解签"],
+  ["风", "车公庙", "转风车改运"],
+  ["莲", "四马路观音堂", "南洋观音签"],
+  ["签", "曼谷龙莲寺", "泰式เซียมซี"],
+  ["烟", "胡志明市天后宫", "盘香与越南求签"],
+  ["林", "奥孙—奥索博圣林", "Ifá 神谕"],
+];
+
+const advisorSteps = [
+  {
+    key: "task",
+    title: "你现在最想用 AI 完成什么？",
+    hint: "先选最接近的任务，之后还可以修改。",
+    options: ["内容创作", "学习与研究", "工作提效", "求职与成长", "编程与产品", "Agent 与自动化", "商业与营销"],
+  },
+  {
+    key: "scope",
+    title: "这是谁要完成的任务？",
+    hint: "使用范围会影响协作、安全和部署建议。",
+    options: ["我个人使用", "团队共同使用", "企业或正式业务"],
+  },
+  {
+    key: "stage",
+    title: "你现在处于哪个阶段？",
+    hint: "Ada 会决定先讲方案，还是直接帮你比较工具。",
+    options: ["还不知道有哪些方法", "知道几种方法但不会选", "已经知道要找什么工具", "正在寻找现有工具的替代品"],
+  },
+  {
+    key: "setup",
+    title: "你希望以什么方式完成？",
+    hint: "选择你愿意承担的配置和学习成本。",
+    options: ["开箱即用", "可以接受简单配置", "可以写代码", "暂时不确定"],
+  },
+  {
+    key: "priority",
+    title: "你最在意什么？",
+    hint: "首版请选择最重要的一项，结果页会提供条件切换建议。",
+    options: ["效果质量", "操作简单", "完成速度", "免费或低成本", "中文体验", "国内稳定访问", "隐私与数据安全", "可定制性"],
+  },
+  {
+    key: "data",
+    title: "任务中包含什么类型的数据？",
+    hint: "高敏感数据不会推荐直接上传到普通公共 AI 服务。",
+    options: ["公开信息", "普通个人资料", "公司内部资料", "客户或业务数据", "身份、财务或医疗等敏感数据", "不确定"],
+  },
+] as const;
+
+const taskRecommendations: Record<string, { type: string; tools: string[]; steps: string[]; done: string[] }> = {
+  "内容创作": {
+    type: "通用 AI 助手 + 垂直创作工具",
+    tools: ["豆包 / ChatGPT：梳理内容与初稿", "即梦 AI / Canva：制作视觉素材", "剪映：字幕、包装与成片"],
+    steps: ["定义受众与最终发布形式", "用通用 AI 完成结构和初稿", "用垂直工具生成视觉或视频素材", "人工核对事实、风格与版权", "按平台规格完成发布"],
+    done: ["内容表达完整且符合目标受众", "事实、引用和版权已经检查", "移动端观看或阅读体验正常"],
+  },
+  "学习与研究": {
+    type: "可溯源搜索 + 长文分析 + 知识整理",
+    tools: ["秘塔 AI 搜索 / Perplexity：查找来源", "Kimi / Claude：阅读和比较长资料", "Notion AI：沉淀学习笔记"],
+    steps: ["把目标改写成可回答的问题", "优先检索一手资料和可信来源", "对多个来源进行交叉比较", "整理概念、证据与未确定结论", "用练习或输出验证是否掌握"],
+    done: ["关键结论都有来源", "能区分事实、推断和观点", "可以用自己的语言完成一次输出"],
+  },
+  "工作提效": {
+    type: "办公 AI + 标准模板 + 可复用工作流",
+    tools: ["飞书妙记：会议转写与摘要", "通义听悟 / Kimi：资料归纳", "办公小浣熊：表格与数据分析"],
+    steps: ["选出重复频率最高的任务", "明确输入、输出和人工确认点", "先用单一工具跑通一次", "固定提示模板和交付格式", "记录节省时间与错误情况"],
+    done: ["同类任务可以重复执行", "结果仍有明确人工复核点", "实际用时或错误率得到改善"],
+  },
+  "求职与成长": {
+    type: "岗位分析 + 材料优化 + 模拟练习",
+    tools: ["ChatGPT / 豆包：拆解岗位要求", "Kimi：分析简历与项目材料", "Gamma：制作作品集和项目陈述"],
+    steps: ["确定目标岗位与能力差距", "从经历中提取可验证成果", "按岗位要求重写材料", "生成问题并进行模拟面试", "根据真实反馈继续迭代"],
+    done: ["简历内容与岗位要求对应", "每段经历都有行动和结果", "能够脱离稿件讲清核心项目"],
+  },
+  "编程与产品": {
+    type: "AI 编程工具 + GitHub 版本管理 + 部署平台",
+    tools: ["Trae / Cursor：生成与修改代码", "GitHub：保存完整版本历史", "Cloudflare Pages / Vercel：公开部署"],
+    steps: ["写清用户、场景和最小功能", "先生成可以操作的第一版", "将完整源代码纳入版本管理", "进行桌面端和手机端测试", "部署后按真实反馈迭代"],
+    done: ["核心流程可以真实使用", "代码与静态资源均已保存", "电脑和手机均能访问", "可以从 GitHub 重新部署"],
+  },
+  "Agent 与自动化": {
+    type: "低代码工作流 / Agent + 知识库 + 人工确认",
+    tools: ["Coze 扣子：低门槛智能体", "Dify：知识库与工作流", "FastGPT：可视化知识问答"],
+    steps: ["选择一个边界清楚的重复任务", "拆成输入、判断、工具和输出", "准备可靠知识和测试样例", "加入失败处理与人工确认", "使用固定任务集持续评测"],
+    done: ["连续任务可以稳定完成", "异常情况不会静默失败", "敏感操作必须经过人工确认"],
+  },
+  "商业与营销": {
+    type: "市场研究 + 内容生产 + 小规模验证",
+    tools: ["秘塔 AI 搜索：市场与竞品资料", "ChatGPT / Claude：策略和卖点整理", "Canva / 即梦 AI：营销素材"],
+    steps: ["定义具体用户和付费问题", "收集竞品、价格与用户证据", "形成可验证的最小方案", "制作一套真实营销素材", "用点击、咨询或付费验证需求"],
+    done: ["目标用户和问题足够具体", "有真实市场证据而非 AI 猜测", "完成至少一次小规模验证"],
+  },
+};
+
 export default function Home() {
-  const [view, setView] = useState<"home" | "library">("home");
+  const [view, setView] = useState<View>("home");
   const [category, setCategory] = useState("全部工具");
   const [query, setQuery] = useState("");
   const [activeQuery, setActiveQuery] = useState("");
@@ -343,6 +462,10 @@ export default function Home() {
   const [selected, setSelected] = useState<Tool | null>(null);
   const [followOpen, setFollowOpen] = useState(false);
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [advisorStep, setAdvisorStep] = useState(0);
+  const [advisorAnswers, setAdvisorAnswers] = useState<Record<string, string>>({});
+  const [advisorDone, setAdvisorDone] = useState(false);
+  const [mobileMenu, setMobileMenu] = useState(false);
 
   useEffect(() => {
     try {
@@ -430,6 +553,26 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  function go(nextView: View) {
+    setView(nextView);
+    setMobileMenu(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function chooseAdvisorAnswer(value: string) {
+    const step = advisorSteps[advisorStep];
+    const next = { ...advisorAnswers, [step.key]: value };
+    setAdvisorAnswers(next);
+    if (advisorStep === advisorSteps.length - 1) setAdvisorDone(true);
+    else setAdvisorStep(advisorStep + 1);
+  }
+
+  function resetAdvisor() {
+    setAdvisorStep(0);
+    setAdvisorAnswers({});
+    setAdvisorDone(false);
+  }
+
   useEffect(() => {
     if (view !== "library") return;
     const trimmed = query.trim();
@@ -452,12 +595,31 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, activeQuery, view]);
 
+  const recommendation = taskRecommendations[advisorAnswers.task || "编程与产品"];
+  const sensitive = ["公司内部资料", "客户或业务数据", "身份、财务或医疗等敏感数据"].includes(advisorAnswers.data);
+
   return (
     <main>
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
 
-      {view === "home" ? (
+      {!["home", "library"].includes(view) && (
+        <header className="topbar">
+          <button className="brand" onClick={() => go("home")} aria-label="返回首页">
+            <span className="brand-mark">AI</span><span>Ada <b>AI导航</b></span>
+          </button>
+          <nav className="desktop-nav" aria-label="主导航">
+            {mainNav.map((item) => <button key={item.view} className={view === item.view ? "active" : ""} onClick={() => go(item.view)}>{item.label}</button>)}
+          </nav>
+          <div className="top-actions">
+            <button className="menu-btn" onClick={() => setMobileMenu(!mobileMenu)} aria-label="打开导航菜单">☰</button>
+            <button className="follow-btn" onClick={() => setFollowOpen(true)}>关注我 <span>↗</span></button>
+          </div>
+          {mobileMenu && <nav className="mobile-menu">{mainNav.map((item) => <button key={item.view} onClick={() => go(item.view)}>{item.label}</button>)}<button onClick={() => go("about")}>关于 Ada</button></nav>}
+        </header>
+      )}
+
+      {view === "home" && (
         <>
           <header className="topbar">
             <button className="brand" onClick={() => setView("home")} aria-label="返回首页">
@@ -465,19 +627,30 @@ export default function Home() {
               <span>Ada <b>AI导航</b></span>
             </button>
             <nav className="desktop-nav" aria-label="主导航">
-              <button className="active">首页</button>
-              <button onClick={() => enterLibrary()}>工具库</button>
-              <button onClick={() => document.getElementById("ranking")?.scrollIntoView({ behavior: "smooth" })}>AI 榜单</button>
-              <button onClick={() => enterLibrary()}>最新收录</button>
-              <button onClick={() => alert("工具提交入口将在下一版接入审核后台。")}>提交工具</button>
+              {mainNav.map((item) => (
+                <button key={item.view} className={view === item.view ? "active" : ""} onClick={() => go(item.view)}>{item.label}</button>
+              ))}
             </nav>
-            <button className="follow-btn" onClick={() => setFollowOpen(true)}>关注我 <span>↗</span></button>
+            <div className="top-actions">
+              <button className="menu-btn" onClick={() => setMobileMenu(!mobileMenu)} aria-label="打开导航菜单">☰</button>
+              <button className="follow-btn" onClick={() => setFollowOpen(true)}>关注我 <span>↗</span></button>
+            </div>
+            {mobileMenu && (
+              <nav className="mobile-menu" aria-label="移动端主导航">
+                {mainNav.map((item) => <button key={item.view} onClick={() => go(item.view)}>{item.label}</button>)}
+                <button onClick={() => go("about")}>关于 Ada</button>
+              </nav>
+            )}
           </header>
 
           <section className="hero">
             <div className="hero-badge"><span /> 已收录 {tools.length} 款 AI 工具 · 持续更新</div>
-            <h1>探索 AI 的<br /><span>无限可能</span></h1>
-            <p>从海量 AI 工具中，发现真正适合你的下一代生产力。</p>
+            <h1>不只找到工具<br /><span>更找到下一步</span></h1>
+            <p>Ada 根据你的目标、基础和约束，帮你选择工具、拆解路径，并把想法真正做出来。</p>
+            <div className="dual-entry">
+              <button className="entry-card primary" onClick={() => go("advisor")}><small>不知道该怎么选</small><b>让 AI 帮我选</b><span>诊断目标 · 拆解路径 · 推荐工具 →</span></button>
+              <button className="entry-card" onClick={() => enterLibrary()}><small>已经知道要找什么</small><b>直接搜索工具</b><span>关键词 · 分类 · 标签筛选 →</span></button>
+            </div>
             <form
               className="hero-search"
               onSubmit={(event) => {
@@ -488,8 +661,8 @@ export default function Home() {
               }}
             >
               <span className="search-icon">⌕</span>
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="你想用 AI 做什么？例如：生成短视频" />
-              <button type="submit">开始探索 <span>→</span></button>
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="搜索 AI 工具，例如：生成短视频" />
+              <button type="submit">搜索工具 <span>→</span></button>
             </form>
             <div className="quick-categories">
               {categories.slice(1, 7).map(([name, icon]) => (
@@ -520,22 +693,31 @@ export default function Home() {
             </div>
           </section>
 
+          <section className="feature-split">
+            <article className="feature-panel resource-feature">
+              <small>FEATURED LEARNING PATH</small><span className="pill">站长推荐</span>
+              <h2>AI 从 0-1 实践实操学习全流程</h2>
+              <p>从会使用 AI，到让 AI 替你完成任务，再到做出自己的工具和产品。</p>
+              <a href="https://ycnd2i22pji6.feishu.cn/docx/PrN6dcQozobhHUxIzascU0munSb?from=from_copylink" target="_blank" rel="noreferrer">开始学习 ↗</a>
+            </article>
+            <article className="feature-panel lab-feature">
+              <small>ADA AI LAB</small><h2>东方灵境</h2>
+              <p>十二种文化仪式互动体验，用 AI 把文化、叙事和交互做成可以亲手体验的产品。</p>
+              <button onClick={() => go("lab")}>进入我的 AI 实验室 →</button>
+            </article>
+          </section>
+
           <section className="creator-strip">
             <div>
-              <small>ABOUT THE CURATOR</small>
-              <h2>和我一起，把 AI 真正用起来</h2>
-              <p>持续分享 AI 工具实测、零基础教程和高效工作流。</p>
+              <small>COMMUNITY SHOWCASE</small>
+              <h2>大家的 Vibe Coding 大赏</h2>
+              <p>第一批作品正在征集中，欢迎提交你的 Vibe Coding 产品。</p>
             </div>
-            <div className="creator-actions">
-              {contacts.map((contact) => (
-                <button key={contact.name} className={contact.tone} onClick={() => setFollowOpen(true)}>
-                  <i>{contact.short}</i>{contact.name}<span>扫码关注</span>
-                </button>
-              ))}
-            </div>
+            <button className="big-action" onClick={() => go("vibe")}>查看投稿规则 →</button>
           </section>
         </>
-      ) : (
+      )}
+      {view === "library" && (
         <div className="library-layout">
           <aside className="sidebar">
             <button className="brand sidebar-brand" onClick={() => setView("home")}>
@@ -619,6 +801,102 @@ export default function Home() {
             {!filteredTools.length && <div className="empty"><span>⌕</span><h2>当前筛选下没有工具</h2><p>搜索内容不会阻止你继续浏览，可以随时返回全部工具。</p><button onClick={() => resetSearch("全部工具")}>查看全部工具</button></div>}
           </section>
         </div>
+      )}
+
+      {view === "advisor" && (
+        <section className="page-shell advisor-page">
+          <div className="page-kicker">ADA DECISION GUIDE</div>
+          {!advisorDone ? (
+            <>
+              <div className="advisor-intro">
+                <div><h1>不知道该用哪个 AI？</h1><p>回答几个真正会改变推荐结果的问题，Ada 会为你生成一条可执行路径。</p></div>
+                <span>{advisorStep + 1} / {advisorSteps.length}</span>
+              </div>
+              <div className="progress"><i style={{ width: `${((advisorStep + 1) / advisorSteps.length) * 100}%` }} /></div>
+              <article className="question-card">
+                <small>问题 {advisorStep + 1}</small>
+                <h2>{advisorSteps[advisorStep].title}</h2>
+                <p>{advisorSteps[advisorStep].hint}</p>
+                <div className="answer-grid">
+                  {advisorSteps[advisorStep].options.map((option) => <button key={option} onClick={() => chooseAdvisorAnswer(option)}>{option}<span>→</span></button>)}
+                </div>
+                {advisorStep > 0 && <button className="text-action" onClick={() => setAdvisorStep(advisorStep - 1)}>← 返回上一步</button>}
+              </article>
+            </>
+          ) : (
+            <div className="result-wrap">
+              <div className="result-head">
+                <div><span className="pill">推荐已生成</span><h1>你的 AI 执行路径</h1></div>
+                <button className="outline-btn" onClick={resetAdvisor}>重新诊断</button>
+              </div>
+              <article className="diagnosis-card">
+                <small>任务判断</small><h2>{advisorAnswers.task} · {advisorAnswers.scope}</h2>
+                <p>你希望以“{advisorAnswers.setup}”的方式完成任务，最看重“{advisorAnswers.priority}”，目前处于“{advisorAnswers.stage}”阶段。</p>
+              </article>
+              <div className="result-columns">
+                <article className="result-card">
+                  <small>推荐方案类型</small><h2>{sensitive ? "安全优先的本地 / 企业方案" : recommendation.type}</h2>
+                  <p>{sensitive ? "任务涉及非公开数据。请先完成脱敏，优先选择支持私有部署、关闭训练或具备企业数据条款的产品。" : "先确定方案组合，再选择具体品牌，避免被单一热门工具限制。"}</p>
+                </article>
+                <article className="result-card"><small>候选工具与角色</small><ul>{recommendation.tools.map((item) => <li key={item}>{item}</li>)}</ul></article>
+              </div>
+              <article className="timeline-card"><small>推荐执行路径</small><ol>{recommendation.steps.map((item, index) => <li key={item}><i>{index + 1}</i><span>{item}</span></li>)}</ol></article>
+              <div className="result-columns">
+                <article className="result-card warning-card"><small>风险与边界</small><ul><li>{sensitive ? "不要把原始敏感数据上传到普通公共 AI 服务。" : "AI 结果必须进行事实、版权和可用性检查。"}</li><li>免费额度、价格和地区可用性可能变化。</li><li>高风险决策和外部发布保留人工确认。</li></ul></article>
+                <article className="result-card"><small>完成标准</small><ul>{recommendation.done.map((item) => <li key={item}>{item}</li>)}</ul></article>
+              </div>
+              <div className="result-actions"><button onClick={() => enterLibrary()}>查看相关工具</button><button className="outline-btn" onClick={() => navigator.clipboard?.writeText(`${advisorAnswers.task}：${recommendation.steps.join(" → ")}`)}>复制这条路径</button></div>
+            </div>
+          )}
+        </section>
+      )}
+
+      {view === "resources" && (
+        <section className="page-shell">
+          <div className="page-hero"><small>LEARNING RESOURCES</small><h1>一条真正能走完的<br /><span>AI 学习路径</span></h1><p>不追逐工具热点，从真实任务开始，逐步形成可复用的能力和产品。</p></div>
+          <article className="learning-feature">
+            <div><span className="pill">第一推荐 · 免费公开</span><h2>AI 从 0-1 实践实操学习全流程</h2><p>适合 AI 初学者、大学生和希望系统提升工作能力的人。从对话使用、真实任务实践，到 AI 编程、产品开发与商业化。</p><div className="meta-row"><span>零基础可学</span><span>实践导向</span><span>持续更新</span></div></div>
+            <a href="https://ycnd2i22pji6.feishu.cn/docx/PrN6dcQozobhHUxIzascU0munSb?from=from_copylink" target="_blank" rel="noreferrer">打开飞书文档 ↗</a>
+          </article>
+          <div className="resource-grid">{resourceGroups.map((group) => <article key={group.title} className={group.featured ? "active" : ""}><span>{group.icon}</span><h2>{group.title}</h2><p>{group.desc}</p><small>{group.featured ? "1 条精选路径" : "内容持续整理中"}</small></article>)}</div>
+        </section>
+      )}
+
+      {view === "lab" && (
+        <section className="page-shell">
+          <div className="page-hero lab-hero"><small>ADA AI LAB</small><h1>东方灵境</h1><p>Ada AI实验室：用AI把想法做成真正可以体验的产品。</p><div className="hero-note">十二种文化仪式互动体验 · 正式链接准备中</div></div>
+          <div className="realm-grid">
+            {realms.map(([mark, place, ritual], index) => (
+              <article className="realm-card" key={place}><span className="realm-index">{String(index + 1).padStart(2, "0")}</span><div className="realm-mark">{mark}</div><small>{place}</small><h2>{ritual}</h2><p>以文化仪式为灵感的沉浸式互动体验。</p><button disabled>即将开放</button></article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {view === "vibe" && (
+        <section className="page-shell">
+          <div className="page-hero vibe-hero"><small>COMMUNITY SHOWCASE</small><h1>大家的<br /><span>Vibe Coding 大赏</span></h1><p>每个人都可以用 AI，把自己的想法做成真正能用的产品。</p><button className="big-action disabled-action" disabled>投稿通道准备中</button></div>
+          <section className="submission-empty"><div className="empty-orbit">✦</div><h2>第一批作品正在征集中</h2><p>欢迎提交你用 AI 完成的网站、工具、小游戏、Agent 或创意实验。作品通过人工审核后将在这里展示。</p></section>
+          <div className="submission-layout">
+            <article className="submission-card"><small>可以投稿</small><h2>真实可访问的 Vibe Coding 产品</h2><ul><li>网站与效率工具</li><li>学习教育与内容创作</li><li>AI Agent 与自动化</li><li>游戏、互动和艺术实验</li></ul></article>
+            <article className="submission-card"><small>审核标准</small><h2>先保证真实、安全与可用</h2><ul><li>至少具备一项可使用功能</li><li>介绍真实且拥有发布权</li><li>不存在欺诈、恶意下载和侵权</li><li>链接可以稳定访问</li></ul></article>
+          </div>
+          <article className="form-template">
+            <div><small>FEISHU FORM TEMPLATE</small><h2>投稿表单字段模板</h2><p>飞书表单创建后，这里的按钮将直接连接公开投稿入口。</p></div>
+            <div className="field-cloud">{["作品名称", "作品链接", "一句话介绍", "详细介绍", "作品分类", "作者昵称", "作者主页", "作品封面", "使用的 AI 工具", "免费 / 付费", "手机端支持", "审核联系方式", "发布权确认", "展示授权"].map((field) => <span key={field}>{field}</span>)}</div>
+          </article>
+          <p className="legal-note">Ada AI导航仅提供作品展示与导航，不对第三方产品的数据安全、服务质量和交易行为作保证。访问和使用前请自行判断风险。</p>
+        </section>
+      )}
+
+      {view === "about" && (
+        <section className="page-shell about-page">
+          <div className="page-hero"><small>ABOUT ADA</small><h1>把 AI 真正用起来</h1><p>Ada 持续整理工具、学习路径和产品实践，帮助更多人从“知道 AI”走到“做出成果”。</p></div>
+          <div className="about-grid">
+            <article><span>AI</span><h2>Ada AI导航</h2><p>帮助你判断下一步该做什么、为什么、用什么，以及如何判断完成。</p></article>
+            <article className="support-card"><span>☕</span><h2>支持本站持续更新</h2><p>微信赞赏码将在这里展示。赞赏完全自愿，不影响网站任何功能。</p><div className="qr-placeholder"><b>微信赞赏码</b><small>占位符 · 待替换</small></div></article>
+          </div>
+        </section>
       )}
 
       {selected && (
