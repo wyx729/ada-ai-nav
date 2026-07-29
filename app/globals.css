@@ -92,6 +92,10 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .card-arrow { color: #9f93f8; font-size: 19px; }
 .creator-strip { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto 85px; padding: 30px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(120, 103, 255, .36); border-radius: 24px; background: linear-gradient(110deg, rgba(35, 32, 80, .88), rgba(13, 18, 42, .88)); }
 .creator-strip p { color: var(--muted); margin: 9px 0 0; font-size: 13px; }
+.showcase-actions { display: flex; align-items: center; gap: 12px; }
+.showcase-actions > .big-action { margin-top: 0; flex: 0 0 auto; }
+.text-action { min-height: 42px; padding: 0 6px; border: 0; background: transparent; color: #b7b2e9; font-size: 12px; font-weight: 700; cursor: pointer; }
+.text-action:hover { color: white; }
 .creator-actions { display: grid; grid-template-columns: repeat(4, 90px); gap: 9px; }
 .creator-actions button { height: 76px; border-radius: 14px; border: 1px solid rgba(132, 120, 215, .25); background: rgba(31, 32, 73, .9); font-weight: 700; transition: .2s ease; }
 .creator-actions button:hover { transform: translateY(-2px); border-color: rgba(143, 126, 255, .65); background: rgba(48, 44, 96, .92); }
@@ -225,6 +229,8 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
   .rank-card p { max-width: 190px; }
   .creator-strip { margin: 0 17px 50px; padding: 23px; display: block; text-align: center; }
   .creator-strip h2 { font-size: 21px; }
+  .showcase-actions { margin-top: 18px; justify-content: center; flex-wrap: wrap; }
+  .showcase-actions > .big-action { margin-top: 0; }
   .creator-actions { grid-template-columns: repeat(2, 1fr); margin-top: 20px; }
   .creator-actions button { height: 62px; font-size: 12px; }
 
