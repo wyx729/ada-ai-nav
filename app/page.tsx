@@ -334,6 +334,7 @@ function ToolLogo({ tool }: { tool: Tool }) {
 }
 
 type View = "home" | "library" | "advisor" | "resources" | "lab" | "vibe" | "about";
+const vibeSubmissionUrl = "https://ycnd2i22pji6.feishu.cn/share/base/form/shrcnpdwydtrpMJxp1Ye1vYHffg";
 
 const mainNav: Array<{ view: View; label: string }> = [
   { view: "home", label: "首页" },
@@ -714,7 +715,10 @@ export default function Home() {
               <h2>大家的 Vibe Coding 大赏</h2>
               <p>第一批作品正在征集中，欢迎提交你的 Vibe Coding 产品。</p>
             </div>
-            <button className="big-action" onClick={() => go("vibe")}>查看投稿规则 →</button>
+            <div className="showcase-actions">
+              <button className="text-action" onClick={() => go("vibe")}>查看投稿规则</button>
+              <a className="big-action" href={vibeSubmissionUrl} target="_blank" rel="noreferrer">立即投稿 ↗</a>
+            </div>
           </section>
         </>
       )}
@@ -876,14 +880,14 @@ export default function Home() {
 
       {view === "vibe" && (
         <section className="page-shell">
-          <div className="page-hero vibe-hero"><small>COMMUNITY SHOWCASE</small><h1>大家的<br /><span>Vibe Coding 大赏</span></h1><p>每个人都可以用 AI，把自己的想法做成真正能用的产品。</p><button className="big-action disabled-action" disabled>投稿通道准备中</button></div>
-          <section className="submission-empty"><div className="empty-orbit">✦</div><h2>第一批作品正在征集中</h2><p>欢迎提交你用 AI 完成的网站、工具、小游戏、Agent 或创意实验。作品通过人工审核后将在这里展示。</p></section>
+          <div className="page-hero vibe-hero"><small>COMMUNITY SHOWCASE</small><h1>大家的<br /><span>Vibe Coding 大赏</span></h1><p>每个人都可以用 AI，把自己的想法做成真正能用的产品。</p><a className="big-action" href={vibeSubmissionUrl} target="_blank" rel="noreferrer">提交我的作品 ↗</a></div>
+          <section className="submission-empty"><div className="empty-orbit">✦</div><h2>第一批作品正在征集中</h2><p>欢迎提交你用 AI 完成的网站、工具、小游戏、Agent 或创意实验。填写飞书报名表后，作品将由 Ada 人工审核，通过后在这里展示。</p><a className="big-action" href={vibeSubmissionUrl} target="_blank" rel="noreferrer">打开报名表 ↗</a></section>
           <div className="submission-layout">
             <article className="submission-card"><small>可以投稿</small><h2>真实可访问的 Vibe Coding 产品</h2><ul><li>网站与效率工具</li><li>学习教育与内容创作</li><li>AI Agent 与自动化</li><li>游戏、互动和艺术实验</li></ul></article>
             <article className="submission-card"><small>审核标准</small><h2>先保证真实、安全与可用</h2><ul><li>至少具备一项可使用功能</li><li>介绍真实且拥有发布权</li><li>不存在欺诈、恶意下载和侵权</li><li>链接可以稳定访问</li></ul></article>
           </div>
           <article className="form-template">
-            <div><small>FEISHU FORM TEMPLATE</small><h2>投稿表单字段模板</h2><p>飞书表单创建后，这里的按钮将直接连接公开投稿入口。</p></div>
+            <div><small>HOW TO SUBMIT</small><h2>三步完成投稿</h2><p>打开飞书报名表，填写作品信息并提交。审核通过后，作品将在大赏中公开展示。</p><a className="big-action" href={vibeSubmissionUrl} target="_blank" rel="noreferrer">前往飞书投稿 ↗</a></div>
             <div className="field-cloud">{["作品名称", "作品链接", "一句话介绍", "详细介绍", "作品分类", "作者昵称", "作者主页", "作品封面", "使用的 AI 工具", "免费 / 付费", "手机端支持", "审核联系方式", "发布权确认", "展示授权"].map((field) => <span key={field}>{field}</span>)}</div>
           </article>
           <p className="legal-note">Ada AI导航仅提供作品展示与导航，不对第三方产品的数据安全、服务质量和交易行为作保证。访问和使用前请自行判断风险。</p>
