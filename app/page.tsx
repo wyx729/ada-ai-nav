@@ -701,8 +701,9 @@ export default function Home() {
               <a href="https://ycnd2i22pji6.feishu.cn/docx/PrN6dcQozobhHUxIzascU0munSb?from=from_copylink" target="_blank" rel="noreferrer">开始学习 ↗</a>
             </article>
             <article className="feature-panel lab-feature">
-              <small>ADA AI LAB</small><h2>东方灵境</h2>
-              <p>十二种文化仪式互动体验，用 AI 把文化、叙事和交互做成可以亲手体验的产品。</p>
+              <small>ADA AI LAB</small><span className="pill">首个实验 · 东方灵境</span>
+              <h2>我的 AI 实验室</h2>
+              <p>用 AI 把想法做成真正可以体验的产品。这里收录我独立设计和开发的 AI 工具、互动体验与产品实验。</p>
               <button onClick={() => go("lab")}>进入我的 AI 实验室 →</button>
             </article>
           </section>
