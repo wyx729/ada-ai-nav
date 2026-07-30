@@ -316,13 +316,17 @@ function logoUrl(domain: string) {
   return `https://www.google.com/s2/favicons?domain_url=https://${clean}&sz=128`;
 }
 
+const localToolLogos: Record<string, string> = {
+  "OpenAI Academy": "/logos/openai-academy.png",
+};
+
 function ToolLogo({ tool }: { tool: Tool }) {
   const [failed, setFailed] = useState(false);
   return (
-    <span className="tool-logo">
+    <span className={`tool-logo ${tool.name === "OpenAI Academy" ? "openai-academy-logo" : ""}`}>
       {!failed && (
         <img
-          src={logoUrl(tool.domain)}
+          src={localToolLogos[tool.name] || logoUrl(tool.domain)}
           alt={`${tool.name} logo`}
           referrerPolicy="no-referrer"
           onError={() => setFailed(true)}
@@ -346,12 +350,12 @@ const mainNav: Array<{ view: View; label: string }> = [
 ];
 
 const resourceGroups = [
-  { title: "推荐学习路径", icon: "✦", desc: "按阶段完成从会用 AI 到做出产品的完整升级。", featured: true },
-  { title: "AI 入门", icon: "01", desc: "从真实任务出发，掌握对话、提示词和基础工具。"},
-  { title: "AI 提效", icon: "02", desc: "把文档、资料、会议和重复工作交给 AI。"},
-  { title: "AI 编程与产品开发", icon: "03", desc: "借助 AI 把想法做成网站、应用和可用产品。"},
-  { title: "Agent 与工作流", icon: "04", desc: "连接工具、知识库与流程，让 AI 连续完成任务。"},
-  { title: "AI 产品与商业化", icon: "05", desc: "从需求、产品验证到获客和可持续变现。"},
+  { title: "推荐学习路径", icon: "✦", desc: "按阶段完成从会用 AI 到做出产品的完整升级。", featured: true, href: "https://ycnd2i22pji6.feishu.cn/docx/PrN6dcQozobhHUxIzascU0munSb?from=from_copylink", external: true, meta: "1 条精选路径" },
+  { title: "AI 入门", icon: "01", desc: "从真实任务出发，掌握对话、提示词和结果核查。", href: "/learn/ai-basics/", meta: "5 章 · 1 个阶段项目" },
+  { title: "AI 提效", icon: "02", desc: "把文档、资料、会议和重复工作交给 AI。", href: "/learn/ai-productivity/", meta: "5 章 · 1 套 AI SOP" },
+  { title: "AI 编程与产品开发", icon: "03", desc: "借助 AI 把想法做成网站、应用和可用产品。", href: "/learn/ai-building/", meta: "5 章 · 发布真实产品" },
+  { title: "Agent 与工作流", icon: "04", desc: "连接工具、知识库与流程，让 AI 连续完成任务。", href: "/learn/agents/", meta: "5 章 · 设计研究 Agent" },
+  { title: "AI 产品与商业化", icon: "05", desc: "从需求、产品验证到获客和可持续变现。", href: "/learn/ai-business/", meta: "5 章 · 完成商业验证" },
 ];
 
 const realms = [
@@ -474,6 +478,11 @@ export default function Home() {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setFavorites(JSON.parse(localStorage.getItem("ada-ai-favorites") || "[]"));
     } catch {}
+    if (window.location.hash === "#resources") {
+      // Allow learning detail pages to return directly to the resource hub.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setView("resources");
+    }
   }, []);
 
   function toggleFavorite(name: string) {
@@ -863,7 +872,23 @@ export default function Home() {
             <div><span className="pill">第一推荐 · 免费公开</span><h2>AI 从 0-1 实践实操学习全流程</h2><p>适合 AI 初学者、大学生和希望系统提升工作能力的人。从对话使用、真实任务实践，到 AI 编程、产品开发与商业化。</p><div className="meta-row"><span>零基础可学</span><span>实践导向</span><span>持续更新</span></div></div>
             <a href="https://ycnd2i22pji6.feishu.cn/docx/PrN6dcQozobhHUxIzascU0munSb?from=from_copylink" target="_blank" rel="noreferrer">打开飞书文档 ↗</a>
           </article>
-          <div className="resource-grid">{resourceGroups.map((group) => <article key={group.title} className={group.featured ? "active" : ""}><span>{group.icon}</span><h2>{group.title}</h2><p>{group.desc}</p><small>{group.featured ? "1 条精选路径" : "内容持续整理中"}</small></article>)}</div>
+          <div className="resource-grid">
+            {resourceGroups.map((group) => (
+              <a
+                key={group.title}
+                className={`resource-card ${group.featured ? "active" : ""}`}
+                href={group.href}
+                target={group.external ? "_blank" : undefined}
+                rel={group.external ? "noreferrer" : undefined}
+              >
+                <span>{group.icon}</span>
+                <h2>{group.title}</h2>
+                <p>{group.desc}</p>
+                <small>{group.meta}</small>
+                <b>进入学习 <i>→</i></b>
+              </a>
+            ))}
+          </div>
         </section>
       )}
 
