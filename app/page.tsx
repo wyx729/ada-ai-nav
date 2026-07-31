@@ -56,6 +56,7 @@ const tools: Tool[] = [
   { name: "Paperpal", domain: "paperpal.com", category: "写作办公", desc: "面向英文论文的学术写作、润色与投稿检查工具。", tags: ["海外", "免费试用"] },
   { name: "Notion AI", domain: "notion.so", category: "写作办公", desc: "集成在 Notion 工作空间中的写作、总结与知识问答助手。", tags: ["海外", "付费"] },
   { name: "Trae", domain: "trae.ai", category: "AI 编程", desc: "字节跳动推出的 AI 原生开发环境，支持智能体式编程。", tags: ["国产可用", "免费"], badge: "热门" },
+  { name: "Qoder", domain: "qoder.com/en", category: "AI 编程", desc: "阿里巴巴推出的新一代智能编程平台，支持代码补全、对话式编程与智能体任务开发。", tags: ["国产可用", "免费试用"], badge: "最新" },
   { name: "Cursor", domain: "cursor.com", category: "AI 编程", desc: "AI 原生代码编辑器，支持代码库理解与 Agent 编程。", tags: ["海外", "免费试用"], badge: "精选" },
   { name: "GitHub Copilot", domain: "github.com/features/copilot", category: "AI 编程", desc: "GitHub 的 AI 编程助手，覆盖补全、聊天、审查与 Agent。", tags: ["海外", "付费"] },
   { name: "通义灵码", domain: "lingma.aliyun.com", category: "AI 编程", desc: "阿里云推出的智能编码助手与 AI IDE。", tags: ["国产可用", "免费"] },
