@@ -901,15 +901,15 @@ export default function Home() {
           <div className="page-hero vibe-hero"><small>COMMUNITY SHOWCASE</small><h1>大家的<br /><span>Vibe Coding 大赏</span></h1><p>每个人都可以用 AI，把自己的想法做成真正能用的产品。</p><a className="big-action" href={vibeSubmissionUrl} target="_blank" rel="noreferrer">提交我的作品 ↗</a></div>
           <section className="vibe-winners">
             <div className="vibe-section-head"><div><small>SELECTED WORK · 001</small><h2>首个审核通过的 Vibe Coding 作品</h2></div><span>人工审核通过</span></div>
-            <a className="vibe-product-card" href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer">
-              <div className="vibe-product-cover"><span>AI × EDUCATION</span><strong>高考英语<br />读后续写训练</strong><i>01</i></div>
-              <div className="vibe-product-copy">
-                <div className="vibe-tags"><span>学习教育</span><span>AI 写作</span><span>支持手机端</span></div>
-                <h2>高考英语读后续写训练</h2>
-                <p>面向高考英语学习场景的 AI 智能写作指导系统，提供读后续写与应用文的导读、写作训练和批改点评。</p>
-                <div className="vibe-product-meta"><span>首个入选作品</span><b>访问产品 ↗</b></div>
-              </div>
-            </a>
+            <div className="vibe-work-grid">
+              <article className="tool-card vibe-work-card">
+                <a className="card-main" href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer">
+                  <span className="vibe-card-logo">英</span>
+                  <div><h2>高考英语读后续写训练 <em>首个入选</em></h2><p>面向高考英语学习场景的 AI 智能写作指导系统，提供导读、写作训练和批改点评。</p></div>
+                </a>
+                <div className="card-bottom"><div><span>学习教育</span><span>AI 写作</span><span>手机端</span></div><a href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer" aria-label="访问高考英语读后续写训练">↗</a></div>
+              </article>
+            </div>
           </section>
           <div className="submission-layout">
             <article className="submission-card"><small>可以投稿</small><h2>真实可访问的 Vibe Coding 产品</h2><ul><li>网站与效率工具</li><li>学习教育与内容创作</li><li>AI Agent 与自动化</li><li>游戏、互动和艺术实验</li></ul></article>
