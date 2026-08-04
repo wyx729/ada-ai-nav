@@ -74,6 +74,7 @@ const tools: Tool[] = [
   { name: "OpenAI Academy", domain: "academy.openai.com", category: "学习资源", desc: "OpenAI 面向所有人的 AI 学习与社区资源平台。", tags: ["海外", "免费"], badge: "最新" },
   { name: "DeepLearning.AI", domain: "deeplearning.ai", category: "学习资源", desc: "吴恩达创办的 AI 课程与开发者学习平台。", tags: ["海外", "免费试用"] },
   { name: "Hugging Face", domain: "huggingface.co", category: "学习资源", desc: "全球开源模型、数据集与 AI 应用社区。", tags: ["海外", "免费"] },
+  { name: "Google Agent Skills", domain: "github.com/google/skills", category: "学习资源", desc: "Google 官方开源的 Agent Skills 技能库，覆盖 Google Cloud、AI/ML、Agent 与开发工具。", tags: ["海外", "免费", "开源"], badge: "官方" },
   { name: "讯飞星火", domain: "xinghuo.xfyun.cn", category: "AI 对话", desc: "科大讯飞推出的认知智能大模型助手，支持搜索、写作与多模态问答。", tags: ["国产可用", "免费"] },
   { name: "阿贝 AI", domain: "abeiai.com", category: "图像设计", desc: "面向中文创作者的 AI 绘画与视觉内容生成平台。", tags: ["国产可用", "免费试用"] },
   { name: "绘蛙", domain: "ihuiwa.com", category: "图像设计", desc: "面向电商场景的 AI 模特图、商品图与营销文案创作工具。", tags: ["国产可用", "免费试用"] },
@@ -233,7 +234,6 @@ type SearchResolution =
 function normalizeSearchText(value: string) {
   return value.toLowerCase().replace(/[\s·、，。！？,.!?：:；;（）()【】[\]_-]/g, "");
 }
-
 function resolveSearch(value: string): SearchResolution {
   const keyword = normalizeSearchText(value);
   if (!keyword) return { mode: "none", category: "全部工具", terms: [] };
