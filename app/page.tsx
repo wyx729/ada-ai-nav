@@ -233,7 +233,6 @@ type SearchResolution =
 function normalizeSearchText(value: string) {
   return value.toLowerCase().replace(/[\s·、，。！？,.!?：:；;（）()【】[\]_-]/g, "");
 }
-
 function resolveSearch(value: string): SearchResolution {
   const keyword = normalizeSearchText(value);
   if (!keyword) return { mode: "none", category: "全部工具", terms: [] };
@@ -716,7 +715,7 @@ export default function Home() {
             <div>
               <small>COMMUNITY SHOWCASE</small>
               <h2>大家的 Vibe Coding 大赏</h2>
-              <p>第一批作品正在征集中，欢迎提交你的 Vibe Coding 产品。</p>
+              <p>首个审核通过的作品已经入选，欢迎继续提交你的 Vibe Coding 产品。</p>
             </div>
             <div className="showcase-actions">
               <button className="text-action" onClick={() => go("vibe")}>查看投稿规则</button>
@@ -900,7 +899,18 @@ export default function Home() {
       {view === "vibe" && (
         <section className="page-shell">
           <div className="page-hero vibe-hero"><small>COMMUNITY SHOWCASE</small><h1>大家的<br /><span>Vibe Coding 大赏</span></h1><p>每个人都可以用 AI，把自己的想法做成真正能用的产品。</p><a className="big-action" href={vibeSubmissionUrl} target="_blank" rel="noreferrer">提交我的作品 ↗</a></div>
-          <section className="submission-empty"><div className="empty-orbit">✦</div><h2>第一批作品正在征集中</h2><p>欢迎提交你用 AI 完成的网站、工具、小游戏、Agent 或创意实验。填写飞书报名表后，作品将由 Ada 人工审核，通过后在这里展示。</p><a className="big-action" href={vibeSubmissionUrl} target="_blank" rel="noreferrer">打开报名表 ↗</a></section>
+          <section className="vibe-winners">
+            <div className="vibe-section-head"><div><small>SELECTED WORK · 001</small><h2>首个审核通过的 Vibe Coding 作品</h2></div><span>人工审核通过</span></div>
+            <a className="vibe-product-card" href="https://aixuxie.xyz/login" target="_blank" rel="noreferrer">
+              <div className="vibe-product-cover"><span>AI × EDUCATION</span><strong>高考英语<br />读后续写训练</strong><i>01</i></div>
+              <div className="vibe-product-copy">
+                <div className="vibe-tags"><span>学习教育</span><span>AI 写作</span><span>支持手机端</span></div>
+                <h2>高考英语读后续写训练</h2>
+                <p>面向高考英语学习场景的 AI 智能写作指导系统，提供读后续写与应用文的导读、写作训练和批改点评。</p>
+                <div className="vibe-product-meta"><span>首个入选作品</span><b>访问产品 ↗</b></div>
+              </div>
+            </a>
+          </section>
           <div className="submission-layout">
             <article className="submission-card"><small>可以投稿</small><h2>真实可访问的 Vibe Coding 产品</h2><ul><li>网站与效率工具</li><li>学习教育与内容创作</li><li>AI Agent 与自动化</li><li>游戏、互动和艺术实验</li></ul></article>
             <article className="submission-card"><small>审核标准</small><h2>先保证真实、安全与可用</h2><ul><li>至少具备一项可使用功能</li><li>介绍真实且拥有发布权</li><li>不存在欺诈、恶意下载和侵权</li><li>链接可以稳定访问</li></ul></article>
