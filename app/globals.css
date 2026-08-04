@@ -10,7 +10,6 @@
   --purple: #725cff;
   --blue: #28d4ff;
 }
-
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--bg); }
 body {
@@ -328,6 +327,28 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .realm-card p { color: var(--muted); font-size: 10px; }
 .realm-card button { position: absolute; left: 20px; bottom: 18px; padding: 8px 11px; border: 1px solid rgba(114,124,177,.2); border-radius: 9px; background: rgba(255,255,255,.04); color: #69718d; font-size: 9px; }
 .disabled-action { opacity: .55; cursor: not-allowed; }
+.vibe-winners { margin-bottom: 20px; }
+.vibe-section-head { margin-bottom: 14px; display:flex; align-items:flex-end; justify-content:space-between; gap:20px; }
+.vibe-section-head small { color:#8174e1; font-size:10px; font-weight:800; letter-spacing:1.5px; }
+.vibe-section-head h2 { margin:9px 0 0; font-size:24px; }
+.vibe-section-head > span { padding:7px 10px; border:1px solid rgba(80,202,184,.28); border-radius:99px; background:rgba(47,157,142,.1); color:#75d7c8; font-size:10px; }
+.vibe-product-card { display:grid; grid-template-columns:minmax(260px,.78fr) 1.22fr; min-height:315px; overflow:hidden; border:1px solid rgba(126,108,255,.42); border-radius:24px; background:linear-gradient(135deg,rgba(24,29,60,.96),rgba(9,13,31,.96)); color:white; text-decoration:none; transition:.25s ease; }
+.vibe-product-card:hover { transform:translateY(-4px); border-color:rgba(126,108,255,.72); box-shadow:0 22px 60px rgba(0,0,0,.24); }
+.vibe-product-cover { position:relative; min-height:315px; padding:32px; display:flex; flex-direction:column; justify-content:center; overflow:hidden; background:radial-gradient(circle at 24% 24%,rgba(83,218,211,.23),transparent 30%),radial-gradient(circle at 85% 75%,rgba(123,83,255,.34),transparent 36%),linear-gradient(145deg,#17244a,#23164e 68%,#11162e); }
+.vibe-product-cover::before, .vibe-product-cover::after { content:""; position:absolute; border:1px solid rgba(144,132,255,.2); border-radius:50%; }
+.vibe-product-cover::before { width:230px; height:230px; right:-90px; top:-80px; }
+.vibe-product-cover::after { width:150px; height:150px; left:-65px; bottom:-60px; }
+.vibe-product-cover span { position:relative; z-index:1; color:#65ddd4; font-size:10px; font-weight:850; letter-spacing:1.6px; }
+.vibe-product-cover strong { position:relative; z-index:1; margin-top:18px; font-size:31px; line-height:1.28; letter-spacing:-1px; }
+.vibe-product-cover i { position:absolute; right:25px; bottom:20px; color:rgba(255,255,255,.15); font-size:67px; font-weight:900; font-style:normal; }
+.vibe-product-copy { padding:37px; display:flex; flex-direction:column; justify-content:center; }
+.vibe-tags { display:flex; flex-wrap:wrap; gap:7px; }
+.vibe-tags span { padding:6px 9px; border-radius:8px; background:rgba(116,95,228,.14); color:#aba1f5; font-size:10px; }
+.vibe-product-copy h2 { margin:22px 0 10px; font-size:27px; }
+.vibe-product-copy p { max-width:620px; margin:0; color:#a5aec9; font-size:13px; line-height:1.8; }
+.vibe-product-meta { margin-top:28px; padding-top:17px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(114,124,177,.18); }
+.vibe-product-meta span { color:#737d9b; font-size:10px; }
+.vibe-product-meta b { color:#b1a8ff; font-size:12px; }
 .submission-empty { margin-bottom: 20px; padding: 44px 25px; text-align: center; border: 1px dashed rgba(126,108,255,.35); border-radius: 22px; background: rgba(14,18,41,.55); }
 .empty-orbit { width: 62px; height: 62px; margin: 0 auto 17px; display:grid; place-items:center; border:1px solid #705fe1; border-radius:50%; color:#aa9cff; box-shadow:0 0 40px rgba(99,73,226,.2); }
 .submission-empty h2 { margin: 0 0 9px; }
@@ -385,6 +406,14 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 
 @media (max-width: 767px) {
   .dual-entry, .feature-split, .submission-layout, .form-template, .result-columns, .about-grid { grid-template-columns:1fr; }
+  .vibe-section-head { align-items:flex-start; flex-direction:column; gap:10px; }
+  .vibe-section-head h2 { font-size:21px; }
+  .vibe-product-card { grid-template-columns:1fr; }
+  .vibe-product-cover { min-height:235px; padding:25px; }
+  .vibe-product-cover strong { font-size:27px; }
+  .vibe-product-copy { padding:25px; }
+  .vibe-product-copy h2 { margin-top:18px; font-size:22px; }
+  .vibe-product-meta { align-items:flex-start; flex-direction:column; gap:12px; }
   .dual-entry { margin-top:24px; }
   .entry-card { padding:17px; }
   .entry-card b { font-size:17px; }
