@@ -901,7 +901,7 @@ export default function Home() {
           <div className="page-hero vibe-hero"><small>COMMUNITY SHOWCASE</small><h1>大家的<br /><span>Vibe Coding 大赏</span></h1><p>每个人都可以用 AI，把自己的想法做成真正能用的产品。</p><a className="big-action" href={vibeSubmissionUrl} target="_blank" rel="noreferrer">提交我的作品 ↗</a></div>
           <section className="vibe-winners">
             <div className="vibe-section-head"><div><small>SELECTED WORK · 001</small><h2>首个审核通过的 Vibe Coding 作品</h2></div><span>人工审核通过</span></div>
-            <a className="vibe-product-card" href="https://aixuxie.xyz/login" target="_blank" rel="noreferrer">
+            <a className="vibe-product-card" href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer">
               <div className="vibe-product-cover"><span>AI × EDUCATION</span><strong>高考英语<br />读后续写训练</strong><i>01</i></div>
               <div className="vibe-product-copy">
                 <div className="vibe-tags"><span>学习教育</span><span>AI 写作</span><span>支持手机端</span></div>
