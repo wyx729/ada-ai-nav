@@ -899,15 +899,18 @@ export default function Home() {
       {view === "vibe" && (
         <section className="page-shell">
           <div className="page-hero vibe-hero"><small>COMMUNITY SHOWCASE</small><h1>大家的<br /><span>Vibe Coding 大赏</span></h1><p>每个人都可以用 AI，把自己的想法做成真正能用的产品。</p><a className="big-action" href={vibeSubmissionUrl} target="_blank" rel="noreferrer">提交我的作品 ↗</a></div>
-          <section className="vibe-winners">
-            <div className="vibe-section-head"><div><small>SELECTED WORK · 001</small><h2>首个审核通过的 Vibe Coding 作品</h2></div><span>人工审核通过</span></div>
-            <div className="vibe-work-grid">
+          <section className="vibe-gallery" aria-labelledby="vibe-gallery-title">
+            <div className="vibe-gallery-head">
+              <div><small>SELECTED WORKS</small><h2 id="vibe-gallery-title">入选作品</h2><p>真实可访问、经过人工审核的 Vibe Coding 产品。</p></div>
+              <span className="tool-count"><b>1</b> 个作品</span>
+            </div>
+            <div className="tool-grid vibe-work-grid">
               <article className="tool-card vibe-work-card">
-                <a className="card-main" href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer">
-                  <span className="vibe-card-logo">英</span>
+                <a className="card-main" href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer" aria-label="访问高考英语读后续写训练产品介绍页">
+                  <span className="vibe-card-logo" aria-hidden="true">英</span>
                   <div><h2>高考英语读后续写训练 <em>首个入选</em></h2><p>面向高考英语学习场景的 AI 智能写作指导系统，提供导读、写作训练和批改点评。</p></div>
                 </a>
-                <div className="card-bottom"><div><span>学习教育</span><span>AI 写作</span><span>手机端</span></div><a href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer" aria-label="访问高考英语读后续写训练">↗</a></div>
+                <div className="card-bottom"><div><span>学习教育</span><span>AI 写作</span><span>手机端</span></div><a href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer" aria-label="访问高考英语读后续写训练产品介绍页">↗</a></div>
               </article>
             </div>
           </section>
