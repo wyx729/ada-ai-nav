@@ -347,8 +347,8 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .vibe-gallery-head p { margin: 0; color: var(--muted); font-size: 12px; }
 .vibe-work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .vibe-work-card .card-main { min-height: 112px; color: inherit; text-decoration: none; }
-.vibe-card-logo { width: 50px; height: 50px; display: grid; place-items: center; overflow: hidden; border: 1px solid rgba(126,108,255,.32); border-radius: 14px; background: white; box-shadow: inset 0 0 0 1px rgba(255,255,255,.7); }
-.vibe-card-logo img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.vibe-card-logo { width: 50px; height: 50px; display: grid; place-items: center; overflow: hidden; border: 1px solid rgba(255,255,255,.12); border-radius: 14px; background: #1c1c1c; box-shadow: inset 0 0 0 1px rgba(255,255,255,.04); }
+.vibe-card-logo img { width: 100%; height: 100%; display: block; object-fit: contain; }
 .vibe-work-card .card-bottom > a { margin-left: 5px; }
 .advisor-page { max-width: 1000px; }
 .advisor-intro, .result-head { margin-top: 14px; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
