@@ -907,7 +907,7 @@ export default function Home() {
             <div className="tool-grid vibe-work-grid">
               <article className="tool-card vibe-work-card">
                 <a className="card-main" href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer" aria-label="访问高考英语读后续写训练产品介绍页">
-                  <span className="vibe-card-logo"><img src="/logos/aixuxie-logo.png" alt="高考英语读后续写训练 Logo" /></span>
+                  <span className="vibe-card-logo"><img src="/logos/aixuxie-logo.svg" alt="高考英语读后续写训练 Logo" /></span>
                   <div><h2>高考英语读后续写训练 <em>首个入选</em></h2><p>面向高考英语学习场景的 AI 智能写作指导系统，提供导读、写作训练和批改点评。</p></div>
                 </a>
                 <div className="card-bottom"><div><span>学习教育</span><span>AI 写作</span><span>手机端</span></div><a href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer" aria-label="访问高考英语读后续写训练产品介绍页">↗</a></div>
