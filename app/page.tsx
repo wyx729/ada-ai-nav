@@ -902,7 +902,7 @@ export default function Home() {
           <section className="vibe-gallery" aria-labelledby="vibe-gallery-title">
             <div className="vibe-gallery-head">
               <div><small>SELECTED WORKS</small><h2 id="vibe-gallery-title">入选作品</h2><p>真实可访问、经过人工审核的 Vibe Coding 产品。</p></div>
-              <span className="tool-count"><b>1</b> 个作品</span>
+              <span className="tool-count"><b>2</b> 个作品</span>
             </div>
             <div className="tool-grid vibe-work-grid">
               <article className="tool-card vibe-work-card">
@@ -911,6 +911,13 @@ export default function Home() {
                   <div><h2>高考英语读后续写训练 <em>首个入选</em></h2><p>面向高考英语学习场景的 AI 智能写作指导系统，提供导读、写作训练和批改点评。</p></div>
                 </a>
                 <div className="card-bottom"><div><span>学习教育</span><span>AI 写作</span><span>手机端</span></div><a href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer" aria-label="访问高考英语读后续写训练产品介绍页">↗</a></div>
+              </article>
+              <article className="tool-card vibe-work-card">
+                <a className="card-main" href="https://lingjingchouqian.979046217.workers.dev" target="_blank" rel="noreferrer" aria-label="访问十二灵境">
+                  <span className="vibe-card-logo vibe-realm-logo" aria-hidden="true">境</span>
+                  <div><h2>十二灵境 <em>审核通过</em></h2><p>以十二种文化仪式为灵感打造的沉浸式互动体验，在数字场景中探索抽签、祈愿与东方叙事。</p></div>
+                </a>
+                <div className="card-bottom"><div><span>文化体验</span><span>互动叙事</span><span>沉浸式</span></div><a href="https://lingjingchouqian.979046217.workers.dev" target="_blank" rel="noreferrer" aria-label="访问十二灵境">↗</a></div>
               </article>
             </div>
           </section>
