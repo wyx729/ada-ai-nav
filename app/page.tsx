@@ -72,6 +72,7 @@ const tools: Tool[] = [
   { name: "讯飞智作", domain: "peiyin.xunfei.cn", category: "音乐语音", desc: "科大讯飞推出的 AI 配音、数字人与视频创作平台。", tags: ["国产可用", "免费试用"] },
   { name: "网易天音", domain: "tianyin.music.163.com", category: "音乐语音", desc: "网易云音乐推出的一站式 AI 音乐创作工具。", tags: ["国产可用", "免费试用"] },
   { name: "OpenAI Academy", domain: "academy.openai.com", category: "学习资源", desc: "OpenAI 面向所有人的 AI 学习与社区资源平台。", tags: ["海外", "免费"], badge: "最新" },
+  { name: "Google Agent Skills", domain: "github.com/google/skills", category: "学习资源", desc: "Google 官方开源的 Agent Skills 技能库，覆盖 Google Cloud、AI/ML、Agent 与开发工具。", tags: ["海外", "免费", "开源", "官方"], badge: "最新" },
   { name: "DeepLearning.AI", domain: "deeplearning.ai", category: "学习资源", desc: "吴恩达创办的 AI 课程与开发者学习平台。", tags: ["海外", "免费试用"] },
   { name: "Hugging Face", domain: "huggingface.co", category: "学习资源", desc: "全球开源模型、数据集与 AI 应用社区。", tags: ["海外", "免费"] },
   { name: "讯飞星火", domain: "xinghuo.xfyun.cn", category: "AI 对话", desc: "科大讯飞推出的认知智能大模型助手，支持搜索、写作与多模态问答。", tags: ["国产可用", "免费"] },
@@ -715,7 +716,7 @@ export default function Home() {
             <div>
               <small>COMMUNITY SHOWCASE</small>
               <h2>大家的 Vibe Coding 大赏</h2>
-              <p>首个审核通过的作品已经入选，欢迎继续提交你的 Vibe Coding 产品。</p>
+              <p>已有 2 个审核通过的作品入选，欢迎继续提交你的 Vibe Coding 产品。</p>
             </div>
             <div className="showcase-actions">
               <button className="text-action" onClick={() => go("vibe")}>查看投稿规则</button>
@@ -907,17 +908,17 @@ export default function Home() {
             <div className="tool-grid vibe-work-grid">
               <article className="tool-card vibe-work-card">
                 <a className="card-main" href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer" aria-label="访问高考英语读后续写训练产品介绍页">
-                  <span className="vibe-card-logo"><img src="/logos/aixuxie-logo.svg" alt="高考英语读后续写训练 Logo" /></span>
+                  <span className="vibe-card-logo"><img src="/logos/aixuxie-logo.png" alt="高考英语读后续写训练 Logo" /></span>
                   <div><h2>高考英语读后续写训练 <em>首个入选</em></h2><p>面向高考英语学习场景的 AI 智能写作指导系统，提供导读、写作训练和批改点评。</p></div>
                 </a>
                 <div className="card-bottom"><div><span>学习教育</span><span>AI 写作</span><span>手机端</span></div><a href="https://aixuxie.xyz/landing" target="_blank" rel="noreferrer" aria-label="访问高考英语读后续写训练产品介绍页">↗</a></div>
               </article>
               <article className="tool-card vibe-work-card">
-                <a className="card-main" href="https://lingjingchouqian.979046.workers.dev" target="_blank" rel="noreferrer" aria-label="访问十二灵境">
-                  <span className="vibe-card-logo vibe-realm-logo" aria-hidden="true">境</span>
-                  <div><h2>十二灵境 <em>审核通过</em></h2><p>以十二种文化仪式为灵感打造的沉浸式互动体验，在数字场景中探索抽签、祈愿与东方叙事。</p></div>
+                <a className="card-main" href="https://lingjingchouqian.979046.workers.dev" target="_blank" rel="noreferrer" aria-label="访问十二灵境互动体验网站">
+                  <span className="vibe-card-logo realm-vibe-logo"><img src="/logos/lingjing-logo.webp" alt="十二灵境 Logo" /></span>
+                  <div><h2>十二灵境</h2><p>以十二种文化求签仪式为灵感打造的沉浸式互动体验，在不同灵境中完成仪式、抽签与解签。</p></div>
                 </a>
-                <div className="card-bottom"><div><span>文化体验</span><span>互动叙事</span><span>沉浸式</span></div><a href="https://lingjingchouqian.979046.workers.dev" target="_blank" rel="noreferrer" aria-label="访问十二灵境">↗</a></div>
+                <div className="card-bottom"><div><span>文化体验</span><span>互动叙事</span><span>沉浸式</span></div><a href="https://lingjingchouqian.979046.workers.dev" target="_blank" rel="noreferrer" aria-label="访问十二灵境互动体验网站">↗</a></div>
               </article>
             </div>
           </section>

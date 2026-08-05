@@ -349,7 +349,8 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .vibe-work-card .card-main { min-height: 112px; color: inherit; text-decoration: none; }
 .vibe-card-logo { width: 50px; height: 50px; display: grid; place-items: center; overflow: hidden; border: 1px solid rgba(255,255,255,.12); border-radius: 14px; background: #1c1c1c; box-shadow: inset 0 0 0 1px rgba(255,255,255,.04); }
 .vibe-card-logo img { width: 100%; height: 100%; display: block; object-fit: contain; }
-.vibe-realm-logo { color: #f5f1ff; font-family: "Noto Serif SC", "Songti SC", serif; font-size: 24px; font-weight: 800; background: radial-gradient(circle at 30% 25%, rgba(169,129,255,.65), transparent 38%), linear-gradient(145deg, #27184d, #0e1737); }
+.realm-vibe-logo { border-radius: 50%; border-color: rgba(232,203,145,.42); background: #07162f; box-shadow: 0 0 18px rgba(215,174,99,.12), inset 0 0 0 1px rgba(255,255,255,.04); }
+.realm-vibe-logo img { border-radius: 50%; object-fit: cover; }
 .vibe-work-card .card-bottom > a { margin-left: 5px; }
 .advisor-page { max-width: 1000px; }
 .advisor-intro, .result-head { margin-top: 14px; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
