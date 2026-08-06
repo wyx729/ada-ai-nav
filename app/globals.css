@@ -283,13 +283,13 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .entry-card span { color: #9da6c5; font-size: 11px; }
 .hero .dual-entry + .hero-search { margin-top: 0; height: 61px; }
 .feature-split { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto 70px; padding: 0 30px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; }
+.feature-split.single-feature { grid-template-columns: 1fr; }
 .feature-panel { min-height: 260px; padding: 30px; border: 1px solid var(--line); border-radius: 24px; background: rgba(12,16,36,.86); }
 .feature-panel small, .page-kicker, .page-hero > small, .learning-feature small, .submission-card > small, .form-template small, .result-card > small, .timeline-card > small, .diagnosis-card > small { color: #8071ef; letter-spacing: 1.8px; font-size: 10px; font-weight: 800; }
 .feature-panel .pill { float: right; }
 .feature-panel h2 { margin: 34px 0 10px; font-size: 27px; }
 .feature-panel p { color: var(--muted); line-height: 1.7; font-size: 13px; }
 .feature-panel a, .feature-panel button, .big-action { display: inline-grid; place-items: center; min-height: 44px; margin-top: 18px; padding: 0 17px; border: 0; border-radius: 12px; background: linear-gradient(135deg,#755dff,#5541db); color: white; text-decoration: none; font-size: 12px; font-weight: 750; }
-.lab-feature { background: radial-gradient(circle at 80% 15%, rgba(42,201,185,.16), transparent 38%), rgba(12,16,36,.86); }
 .pill { display: inline-flex; width: fit-content; padding: 6px 10px; border-radius: 99px; background: rgba(105,82,222,.27); color: #b9adff; font-size: 9px; font-weight: 800; }
 .creator-strip > .big-action { margin-top: 0; flex: 0 0 auto; }
 .page-shell { position: relative; z-index: 1; max-width: 1180px; min-height: 100vh; margin: 0 auto; padding: 140px 30px 90px; }
@@ -351,6 +351,50 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .vibe-card-logo img { width: 100%; height: 100%; display: block; object-fit: contain; }
 .realm-vibe-logo { border-radius: 50%; border-color: rgba(232,203,145,.42); background: #07162f; box-shadow: 0 0 18px rgba(215,174,99,.12), inset 0 0 0 1px rgba(255,255,255,.04); }
 .realm-vibe-logo img { border-radius: 50%; object-fit: cover; }
+.practice-page { max-width: 1180px; }
+.practice-hero { margin-bottom: 32px; }
+.practice-feature { padding: 25px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 22px; align-items: center; border: 1px solid rgba(126,108,255,.42); border-radius: 22px; background: linear-gradient(120deg,rgba(44,34,98,.86),rgba(12,17,39,.9)); }
+.practice-feature small, .practice-card-head small, .practice-modal > small, .practice-outcome small { color:#8d7ff5; font-size:9px; font-weight:850; letter-spacing:1.4px; }
+.practice-feature h2 { margin:8px 0 7px; font-size:24px; }
+.practice-feature p { margin:0; color:var(--muted); font-size:12px; line-height:1.65; }
+.practice-picks { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.practice-picks button { min-width:0; padding:13px; display:grid; grid-template-columns:40px 1fr auto; gap:11px; align-items:center; border:1px solid rgba(255,255,255,.09); border-radius:13px; background:rgba(8,12,31,.5); text-align:left; }
+.practice-picks button > span, .practice-card-head > span { display:grid; place-items:center; width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg,#6753df,#33306d); color:white; font-weight:850; }
+.practice-picks b { display:block; margin-top:4px; overflow:hidden; font-size:12px; white-space:nowrap; text-overflow:ellipsis; }
+.practice-picks i { color:#8d7ff5; font-style:normal; }
+.practice-toolbar { margin:25px 0 18px; display:flex; justify-content:space-between; align-items:center; gap:15px; }
+.practice-filters { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; }
+.practice-filters button { white-space:nowrap; padding:9px 14px; border:1px solid rgba(114,124,177,.23); border-radius:10px; background:rgba(16,20,45,.7); color:#8f98b7; font-size:11px; }
+.practice-filters button.active { color:white; border-color:rgba(126,108,255,.55); background:rgba(78,62,165,.58); }
+.practice-toolbar > span { flex:0 0 auto; color:#7f89a8; font-size:11px; }
+.practice-toolbar > span b { margin-right:4px; color:#a99eff; font-size:17px; }
+.practice-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.practice-card { min-width:0; min-height:355px; padding:21px; display:flex; flex-direction:column; border:1px solid var(--line); border-radius:18px; background:rgba(12,16,37,.87); transition:.2s ease; }
+.practice-card:hover { transform:translateY(-3px); border-color:rgba(126,108,255,.55); }
+.practice-card-head { display:flex; align-items:center; gap:10px; }
+.practice-card-head em { margin-left:auto; padding:4px 7px; border-radius:7px; background:rgba(104,82,222,.28); color:#b9afff; font-size:8px; font-style:normal; }
+.practice-card h2 { margin:18px 0 9px; font-size:18px; }
+.practice-card > p { margin:0; min-height:58px; color:var(--muted); font-size:11px; line-height:1.7; }
+.practice-card dl { margin:16px 0 18px; padding:11px 0; display:grid; gap:8px; border-top:1px solid rgba(114,124,177,.13); border-bottom:1px solid rgba(114,124,177,.13); }
+.practice-card dl div { display:flex; justify-content:space-between; gap:12px; }
+.practice-card dt { color:#697390; font-size:9px; }
+.practice-card dd { margin:0; color:#aab2cc; font-size:9px; }
+.practice-actions { margin-top:auto; display:flex; gap:8px; }
+.practice-actions button, .practice-actions a { min-height:38px; padding:0 12px; display:grid; place-items:center; border:1px solid rgba(126,108,255,.36); border-radius:10px; background:rgba(94,72,201,.24); color:#c0b8ff; text-decoration:none; font-size:10px; font-weight:750; }
+.practice-actions button { flex:1; }
+.practice-actions a { background:#654fda; color:white; }
+.practice-modal > h2 { margin:8px 0 0; font-size:27px; }
+.practice-outcome { padding:14px; border-radius:12px; background:rgba(99,78,208,.16); }
+.practice-outcome b { display:block; margin-top:6px; color:#d4d0ee; font-size:12px; }
+.practice-modal ol { margin:18px 0 21px; padding:0; display:grid; gap:8px; list-style:none; }
+.practice-modal li { display:grid; grid-template-columns:28px 1fr; gap:9px; align-items:center; }
+.practice-modal li > span { display:grid; place-items:center; width:27px; height:27px; border-radius:9px; background:#5947bd; font-size:9px; }
+.practice-modal li p { margin:0; color:#aab2cc; font-size:11px; line-height:1.5; }
+.practice-library .library-header { margin-bottom:18px; }
+.skill-source-note { margin-bottom:22px; padding:11px 13px; border:1px solid rgba(104,113,164,.22); border-radius:12px; background:rgba(14,18,41,.72); color:#8993b1; font-size:10px; line-height:1.6; }
+.skill-logo { display:grid; place-items:center; width:50px; height:50px; border-radius:14px; background:linear-gradient(135deg,#6854df,#312b69); color:white; font-size:13px; font-weight:900; letter-spacing:-.4px; }
+.skill-card .card-main { cursor:pointer; }
+.skill-card .card-bottom > div { align-items:center; }
 .vibe-work-card .card-bottom > a { margin-left: 5px; }
 .advisor-page { max-width: 1000px; }
 .advisor-intro, .result-head { margin-top: 14px; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
@@ -393,6 +437,7 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
   .mobile-menu button { padding:11px; border:0; border-radius:9px; background:rgba(255,255,255,.04); text-align:left; font-size:10px; }
   .resource-grid, .realm-grid { grid-template-columns:repeat(2,1fr); }
   .vibe-work-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .practice-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
 
 @media (max-width: 767px) {
@@ -418,6 +463,10 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
   .vibe-gallery-head h2 { font-size:21px; }
   .vibe-gallery-head .tool-count { margin-top:2px; }
   .vibe-work-grid { grid-template-columns:1fr; }
+  .practice-feature { padding:20px; grid-template-columns:1fr; }
+  .practice-picks, .practice-grid { grid-template-columns:1fr; }
+  .practice-toolbar { align-items:flex-start; }
+  .practice-card { min-height:330px; }
   .advisor-intro h1, .result-head h1 { font-size:29px; }
   .answer-grid { grid-template-columns:1fr; }
   .question-card, .diagnosis-card, .result-card, .timeline-card { padding:22px; }
