@@ -332,6 +332,49 @@ function ToolLogo({ tool }: { tool: Tool }) {
 }
 
 type View = "home" | "library" | "advisor" | "resources" | "practice" | "vibe" | "about";
+type LegalDoc = "disclaimer" | "privacy" | "listing" | "correction";
+
+const legalDocuments: Record<LegalDoc, { title: string; kicker: string; sections: Array<{ heading: string; body: string }> }> = {
+  disclaimer: {
+    title: "免责声明",
+    kicker: "DISCLAIMER",
+    sections: [
+      { heading: "独立第三方平台", body: "Ada AI导航是独立的第三方信息整理与工具导航平台，与页面收录的产品、品牌及其所属公司不存在隶属、代理、赞助、联合运营或官方合作关系，除非页面另有明确说明。" },
+      { heading: "商标与内容归属", body: "页面中用于识别产品的名称、商标与 Logo 归各自权利人所有。本站对工具的介绍为基于公开信息所作的简要整理，不代表权利人对本站的认可或背书。" },
+      { heading: "第三方服务", body: "外部链接会带你前往第三方网站。其内容、价格、可用性、地区限制、隐私措施及服务质量由相应服务方负责，本站不对使用结果或交易损失作保证。请在使用前阅读第三方条款并自行判断风险。" },
+      { heading: "信息时效", body: "本站会尽力保持信息准确，但 AI 产品更新频繁，部分功能、价格、链接与政策可能发生变化。重要决策请以产品官方网站的最新信息为准。" },
+    ],
+  },
+  privacy: {
+    title: "隐私政策",
+    kicker: "PRIVACY",
+    sections: [
+      { heading: "当前收集范围", body: "本站无需注册即可浏览。工具收藏偏好仅保存在你的浏览器本地存储中，本站不会通过该功能获取你的姓名、手机号或账号信息。" },
+      { heading: "外部网站", body: "当你点击工具、学习资料、GitHub 项目或投稿表单后，将进入第三方服务；第三方可能依据其自身政策收集必要数据。本站的隐私说明不适用于这些外部网站。" },
+      { heading: "必要技术信息", body: "网站托管服务可能为安全、稳定运行与基础统计处理访问日志、设备或网络信息。本站不会出售你的个人信息，也不会主动收集与导航功能无关的敏感信息。" },
+      { heading: "你的选择", body: "你可以随时在浏览器设置中清除本站的本地存储与站点数据。如未来增加账号、支付、留言或个性化分析功能，本政策会在功能上线前同步更新。" },
+    ],
+  },
+  listing: {
+    title: "收录规则",
+    kicker: "LISTING POLICY",
+    sections: [
+      { heading: "收录标准", body: "优先收录具有明确产品主体、可正常访问、功能描述真实，并对用户具有实际价值的 AI 工具、公开学习资源和开源项目。" },
+      { heading: "链接与介绍", body: "工具入口原则上指向官方网站、官方应用页或原始开源仓库；介绍以客观概括为主，不使用“官方指定”“唯一权威”等无法证明的表述。" },
+      { heading: "商业内容", body: "普通收录不代表本站推荐或担保。未来如出现付费置顶、返佣链接、广告或品牌合作，将在相应位置明确标注“广告”“推广”或“商业合作”。" },
+      { heading: "不予收录", body: "不收录明显仿冒、欺诈、恶意下载、绕过付费、侵犯他人权利或缺乏基本安全说明的站点；已收录项目出现上述问题时可被更正或移除。" },
+    ],
+  },
+  correction: {
+    title: "纠错与下架",
+    kicker: "CORRECTION & TAKEDOWN",
+    sections: [
+      { heading: "可以反馈什么", body: "如果你发现链接失效、描述错误、非官方入口、Logo 使用不当，或你是相关权利人并希望修改或移除内容，欢迎通过本站“关注我”入口中的公开联系方式提交说明。" },
+      { heading: "建议提供的信息", body: "请提供涉及的页面或工具名称、需要更正或下架的具体内容、事实依据或权利证明，以及便于核实和回复的联系方式。请勿提交与处理事项无关的敏感信息。" },
+      { heading: "处理方式", body: "本站将在核实后尽快更正链接或描述；对权属清晰、理由合理的下架申请，将停止展示相关名称、Logo、介绍或入口。必要时会联系提交者补充核验材料。" },
+    ],
+  },
+};
 const vibeSubmissionUrl = "https://ycnd2i22pji6.feishu.cn/share/base/form/shrcnpdwydtrpMJxp1Ye1vYHffg";
 
 const mainNav: Array<{ view: View; label: string }> = [
@@ -493,6 +536,7 @@ export default function Home() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [practiceFilter, setPracticeFilter] = useState<(typeof practiceCategories)[number]>("全部");
   const [selectedPractice, setSelectedPractice] = useState<PracticeItem | null>(null);
+  const [legalDoc, setLegalDoc] = useState<LegalDoc | null>(null);
 
   useEffect(() => {
     try {
@@ -998,6 +1042,38 @@ export default function Home() {
             <article className="support-card"><span>☕</span><h2>支持本站持续更新</h2><p>微信赞赏码将在这里展示。赞赏完全自愿，不影响网站任何功能。</p><div className="qr-placeholder"><b>微信赞赏码</b><small>占位符 · 待替换</small></div></article>
           </div>
         </section>
+      )}
+
+      <footer className="site-footer">
+        <div className="footer-disclaimer">
+          <span className="footer-shield" aria-hidden="true">i</span>
+          <p><b>独立第三方导航</b>Ada AI导航与所收录产品及公司不存在隶属、代理、赞助或官方合作关系，除非另有明确说明。产品名称、商标及 Logo 归各自权利人所有。</p>
+        </div>
+        <div className="footer-bottom">
+          <div><span className="brand-mark">AI</span><span><b>Ada AI导航</b><small>帮助你找到合适的工具与下一步</small></span></div>
+          <nav aria-label="网站政策与反馈">
+            <button onClick={() => setLegalDoc("disclaimer")}>免责声明</button>
+            <button onClick={() => setLegalDoc("privacy")}>隐私政策</button>
+            <button onClick={() => setLegalDoc("listing")}>收录规则</button>
+            <button onClick={() => setLegalDoc("correction")}>纠错与下架</button>
+          </nav>
+          <small>© 2026 Ada AI导航 · 第三方工具信息仅供参考</small>
+        </div>
+      </footer>
+
+      {legalDoc && (
+        <div className="modal-backdrop" onMouseDown={() => setLegalDoc(null)}>
+          <section className="legal-modal" onMouseDown={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="legal-modal-title">
+            <button className="modal-close" onClick={() => setLegalDoc(null)} aria-label="关闭">×</button>
+            <small>{legalDocuments[legalDoc].kicker}</small>
+            <h2 id="legal-modal-title">{legalDocuments[legalDoc].title}</h2>
+            <p className="legal-updated">更新日期：2026 年 8 月 6 日</p>
+            <div className="legal-sections">
+              {legalDocuments[legalDoc].sections.map((section) => <article key={section.heading}><h3>{section.heading}</h3><p>{section.body}</p></article>)}
+            </div>
+            <button className="legal-confirm" onClick={() => setLegalDoc(null)}>我知道了</button>
+          </section>
+        </div>
       )}
 
       {selected && (
