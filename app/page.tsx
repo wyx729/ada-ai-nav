@@ -467,6 +467,16 @@ const taskRecommendations: Record<string, { type: string; tools: string[]; steps
   },
 };
 
+const advisorToolNames: Record<string, string[]> = {
+  "内容创作": ["豆包", "ChatGPT", "即梦 AI", "Canva 可画", "剪映"],
+  "学习与研究": ["秘塔 AI 搜索", "Perplexity", "Kimi", "Claude", "Notion AI"],
+  "工作提效": ["飞书妙记", "通义听悟", "Kimi", "办公小浣熊"],
+  "求职与成长": ["ChatGPT", "豆包", "Kimi", "Gamma"],
+  "编程与产品": ["Trae", "Cursor", "GitHub Copilot", "Replit"],
+  "Agent 与自动化": ["Coze 扣子", "Dify", "FastGPT", "腾讯元器"],
+  "商业与营销": ["秘塔 AI 搜索", "ChatGPT", "Claude", "Canva 可画", "即梦 AI"],
+};
+
 export default function Home() {
   const [view, setView] = useState<View>("home");
   const [category, setCategory] = useState("全部工具");
@@ -618,6 +628,9 @@ export default function Home() {
   }, [query, activeQuery, view]);
 
   const recommendation = taskRecommendations[advisorAnswers.task || "编程与产品"];
+  const advisorTools = (advisorToolNames[advisorAnswers.task || "编程与产品"] || [])
+    .map((name) => tools.find((tool) => tool.name === name))
+    .filter((tool): tool is Tool => Boolean(tool));
   const sensitive = ["公司内部资料", "客户或业务数据", "身份、财务或医疗等敏感数据"].includes(advisorAnswers.data);
 
   return (
@@ -865,7 +878,24 @@ export default function Home() {
                 <article className="result-card warning-card"><small>风险与边界</small><ul><li>{sensitive ? "不要把原始敏感数据上传到普通公共 AI 服务。" : "AI 结果必须进行事实、版权和可用性检查。"}</li><li>免费额度、价格和地区可用性可能变化。</li><li>高风险决策和外部发布保留人工确认。</li></ul></article>
                 <article className="result-card"><small>完成标准</small><ul>{recommendation.done.map((item) => <li key={item}>{item}</li>)}</ul></article>
               </div>
-              <div className="result-actions"><button onClick={() => enterLibrary()}>查看相关工具</button><button className="outline-btn" onClick={() => navigator.clipboard?.writeText(`${advisorAnswers.task}：${recommendation.steps.join(" → ")}`)}>复制这条路径</button></div>
+              <section className="advisor-tools-section" aria-labelledby="advisor-tools-title">
+                <div className="advisor-tools-head">
+                  <div><small>RECOMMENDED TOOLS</small><h2 id="advisor-tools-title">为你选好的工具</h2><p>无需再去工具库筛选，点击即可直接开始使用。</p></div>
+                  <span><b>{advisorTools.length}</b> 个推荐</span>
+                </div>
+                <div className="advisor-tool-grid">
+                  {advisorTools.map((tool, index) => (
+                    <a className="advisor-tool-card" key={tool.name} href={`https://${tool.domain}`} target="_blank" rel="noreferrer">
+                      <div className="advisor-tool-main">
+                        <ToolLogo tool={tool} />
+                        <div><span>推荐 {String(index + 1).padStart(2, "0")}</span><h3>{tool.name}{tool.badge && <em>{tool.badge}</em>}</h3><p>{tool.desc}</p></div>
+                      </div>
+                      <div className="advisor-tool-bottom"><div>{tool.tags.slice(0, 2).map((tag) => <span key={tag}>{tag}</span>)}</div><b>立即使用 ↗</b></div>
+                    </a>
+                  ))}
+                </div>
+              </section>
+              <div className="result-actions"><button className="outline-btn" onClick={() => navigator.clipboard?.writeText(`${advisorAnswers.task}：${recommendation.steps.join(" → ")}`)}>复制这条路径</button></div>
             </div>
           )}
         </section>
