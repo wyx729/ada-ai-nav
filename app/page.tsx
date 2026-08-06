@@ -331,7 +331,7 @@ function ToolLogo({ tool }: { tool: Tool }) {
   );
 }
 
-type View = "home" | "library" | "advisor" | "resources" | "lab" | "vibe" | "about";
+type View = "home" | "library" | "advisor" | "resources" | "practice" | "vibe" | "about";
 const vibeSubmissionUrl = "https://ycnd2i22pji6.feishu.cn/share/base/form/shrcnpdwydtrpMJxp1Ye1vYHffg";
 
 const mainNav: Array<{ view: View; label: string }> = [
@@ -339,8 +339,39 @@ const mainNav: Array<{ view: View; label: string }> = [
   { view: "library", label: "AI 工具库" },
   { view: "advisor", label: "AI 帮我选" },
   { view: "resources", label: "学习资源" },
-  { view: "lab", label: "我的 AI 实验室" },
+  { view: "practice", label: "AI 实战库" },
   { view: "vibe", label: "Vibe Coding 大赏" },
+];
+
+type PracticeItem = {
+  title: string;
+  category: "办公与内容" | "设计与创作" | "编程与开发" | "质量与安全";
+  icon: string;
+  desc: string;
+  source: string;
+  stars: string;
+  tags: string[];
+  repo: string;
+  featured?: boolean;
+};
+
+const practiceCategories = ["全部", "办公与内容", "设计与创作", "编程与开发", "质量与安全"] as const;
+
+const practiceItems: PracticeItem[] = [
+  { title: "DOCX 文档", category: "办公与内容", icon: "W", desc: "创建、编辑和分析 Word 文档，适合报告、合同、方案与长文档处理。", source: "Anthropic Skills", stars: "166.4k", tags: ["官方", "文档", "Office"], repo: "https://github.com/anthropics/skills/tree/main/skills/docx", featured: true },
+  { title: "PPTX 演示文稿", category: "办公与内容", icon: "P", desc: "创建、修改和检查 PowerPoint，覆盖版式、备注、模板与演示内容。", source: "Anthropic Skills", stars: "166.4k", tags: ["官方", "PPT", "演示"], repo: "https://github.com/anthropics/skills/tree/main/skills/pptx" },
+  { title: "XLSX 电子表格", category: "办公与内容", icon: "X", desc: "读取、创建和编辑 Excel 表格，支持公式、格式、分析和可视化工作流。", source: "Anthropic Skills", stars: "166.4k", tags: ["官方", "Excel", "数据"], repo: "https://github.com/anthropics/skills/tree/main/skills/xlsx" },
+  { title: "PDF 处理", category: "办公与内容", icon: "PDF", desc: "提取内容、生成 PDF、处理表单，并完成需要版面校验的文档任务。", source: "Anthropic Skills", stars: "166.4k", tags: ["官方", "PDF", "表单"], repo: "https://github.com/anthropics/skills/tree/main/skills/pdf" },
+  { title: "Frontend Design", category: "设计与创作", icon: "UI", desc: "生成更有设计感、可直接使用的前端界面，减少千篇一律的 AI 风格。", source: "Anthropic Skills", stars: "166.4k", tags: ["官方", "UI/UX", "前端"], repo: "https://github.com/anthropics/skills/tree/main/skills/frontend-design", featured: true },
+  { title: "Canvas Design", category: "设计与创作", icon: "画", desc: "将视觉概念制作成 PNG 或 PDF 作品，适合海报、视觉稿和静态设计。", source: "Anthropic Skills", stars: "166.4k", tags: ["官方", "视觉", "设计"], repo: "https://github.com/anthropics/skills/tree/main/skills/canvas-design" },
+  { title: "React Best Practices", category: "编程与开发", icon: "R", desc: "Vercel 工程团队整理的 React 与 Next.js 性能优化规则，覆盖瀑布、包体积和渲染。", source: "Vercel Agent Skills", stars: "29.8k", tags: ["官方", "React", "性能"], repo: "https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices", featured: true },
+  { title: "Web Design Guidelines", category: "质量与安全", icon: "✓", desc: "依据 100+ 条界面规则审查可访问性、交互、表单、动画、性能与移动端体验。", source: "Vercel Agent Skills", stars: "29.8k", tags: ["官方", "体验审查", "可访问性"], repo: "https://github.com/vercel-labs/agent-skills/tree/main/skills/web-design-guidelines" },
+  { title: "Webapp Testing", category: "质量与安全", icon: "测", desc: "使用 Playwright 检查本地 Web 应用的页面行为、交互流程与异常状态。", source: "Anthropic Skills", stars: "166.4k", tags: ["官方", "测试", "Playwright"], repo: "https://github.com/anthropics/skills/tree/main/skills/webapp-testing" },
+  { title: "MCP Builder", category: "编程与开发", icon: "M", desc: "按规范创建 MCP 服务，把外部 API、数据和工具能力连接给 AI Agent。", source: "Anthropic Skills", stars: "166.4k", tags: ["官方", "MCP", "Agent"], repo: "https://github.com/anthropics/skills/tree/main/skills/mcp-builder" },
+  { title: "Anthropic Skills 官方合集", category: "编程与开发", icon: "A", desc: "Anthropic 官方 Agent Skills 总仓库，汇集创意设计、开发技术、企业沟通、文档处理、Skill 规范与模板。", source: "Anthropic", stars: "166.4k", tags: ["官方合集", "Agent Skills", "模板", "开源"], repo: "https://github.com/anthropics/skills", featured: true },
+  { title: "TencentDB Agent Memory", category: "编程与开发", icon: "忆", desc: "腾讯云开源的 Agent 团队记忆中枢，将对话、文档和代码沉淀为可复用的 Chat Memory、Skills、Wiki 与 CodeGraph。", source: "TencentCloud", stars: "14.5k", tags: ["官方", "Agent 记忆", "团队知识", "开源"], repo: "https://github.com/TencentCloud/TencentDB-Agent-Memory", featured: true },
+  { title: "Acquire Codebase Knowledge", category: "编程与开发", icon: "库", desc: "系统梳理陌生代码库的结构、组件和关键链路，适合接手项目与代码库入门。", source: "GitHub Awesome Copilot", stars: "37.5k", tags: ["GitHub", "代码库", "文档"], repo: "https://github.com/github/awesome-copilot/tree/main/skills/acquire-codebase-knowledge" },
+  { title: "Differential Review", category: "质量与安全", icon: "审", desc: "结合 Git 历史对代码变更做安全导向审查，定位新增风险与潜在回归。", source: "Trail of Bits Skills", stars: "6.4k", tags: ["安全", "代码审查", "Git"], repo: "https://github.com/trailofbits/skills/tree/main/plugins/differential-review" },
 ];
 
 const resourceGroups = [
@@ -350,21 +381,6 @@ const resourceGroups = [
   { title: "AI 编程与产品开发", icon: "03", desc: "借助 AI 把想法做成网站、应用和可用产品。", href: "/learn/ai-building/", meta: "5 章 · 发布真实产品" },
   { title: "Agent 与工作流", icon: "04", desc: "连接工具、知识库与流程，让 AI 连续完成任务。", href: "/learn/agents/", meta: "5 章 · 设计研究 Agent" },
   { title: "AI 产品与商业化", icon: "05", desc: "从需求、产品验证到获客和可持续变现。", href: "/learn/ai-business/", meta: "5 章 · 完成商业验证" },
-];
-
-const realms = [
-  ["水", "贵船神社", "水显影"],
-  ["鱼", "川越冰川神社", "钓鱼签"],
-  ["晴", "气象神社", "晴天娃娃签"],
-  ["恋", "布忍神社", "当代恋爱文字签"],
-  ["缘", "安井金比罗宫", "切缘与结缘"],
-  ["珏", "台北龙山寺", "筊杯确认式求签"],
-  ["诗", "黄大仙祠", "签诗与职业解签"],
-  ["风", "车公庙", "转风车改运"],
-  ["莲", "四马路观音堂", "南洋观音签"],
-  ["签", "曼谷龙莲寺", "泰式เซียมซี"],
-  ["烟", "胡志明市天后宫", "盘香与越南求签"],
-  ["林", "奥孙—奥索博圣林", "Ifá 神谕"],
 ];
 
 const advisorSteps = [
@@ -465,6 +481,8 @@ export default function Home() {
   const [advisorAnswers, setAdvisorAnswers] = useState<Record<string, string>>({});
   const [advisorDone, setAdvisorDone] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [practiceFilter, setPracticeFilter] = useState<(typeof practiceCategories)[number]>("全部");
+  const [selectedPractice, setSelectedPractice] = useState<PracticeItem | null>(null);
 
   useEffect(() => {
     try {
@@ -697,18 +715,12 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="feature-split">
+          <section className="feature-split single-feature">
             <article className="feature-panel resource-feature">
               <small>FEATURED LEARNING PATH</small><span className="pill">站长推荐</span>
               <h2>AI 从 0-1 实践实操学习全流程</h2>
               <p>从会使用 AI，到让 AI 替你完成任务，再到做出自己的工具和产品。</p>
               <a href="https://ycnd2i22pji6.feishu.cn/docx/PrN6dcQozobhHUxIzascU0munSb?from=from_copylink" target="_blank" rel="noreferrer">开始学习 ↗</a>
-            </article>
-            <article className="feature-panel lab-feature">
-              <small>ADA AI LAB</small><span className="pill">首个实验 · 东方灵境</span>
-              <h2>我的 AI 实验室</h2>
-              <p>用 AI 把想法做成真正可以体验的产品。这里收录我独立设计和开发的 AI 工具、互动体验与产品实验。</p>
-              <button onClick={() => go("lab")}>进入我的 AI 实验室 →</button>
             </article>
           </section>
 
@@ -886,15 +898,29 @@ export default function Home() {
         </section>
       )}
 
-      {view === "lab" && (
-        <section className="page-shell">
-          <div className="page-hero lab-hero"><small>ADA AI LAB</small><h1>东方灵境</h1><p>Ada AI实验室：用AI把想法做成真正可以体验的产品。</p><div className="hero-note">十二种文化仪式互动体验 · 正式链接准备中</div></div>
-          <div className="realm-grid">
-            {realms.map(([mark, place, ritual], index) => (
-              <article className="realm-card" key={place}><span className="realm-index">{String(index + 1).padStart(2, "0")}</span><div className="realm-mark">{mark}</div><small>{place}</small><h2>{ritual}</h2><p>以文化仪式为灵感的沉浸式互动体验。</p><button disabled>即将开放</button></article>
+      {view === "practice" && (
+        <div className="library-layout practice-library">
+          <aside className="sidebar">
+            <div className="sidebar-brand"><button className="brand" onClick={() => setView("home")}><span className="brand-mark">AI</span><span>Ada <b>AI导航</b></span></button></div>
+            <p className="side-label">SKILL 分类</p>
+            <nav className="side-nav" aria-label="Skill 分类">{practiceCategories.map((item, index) => <button key={item} className={practiceFilter === item ? "active" : ""} onClick={() => setPracticeFilter(item)}><span>{["✦","▤","◇","⌘","✓"][index]}</span>{item}<i>{practiceItems.filter((skill) => item === "全部" || skill.category === item).length}</i></button>)}</nav>
+            <button className="back-home" onClick={() => setView("home")}>← 返回品牌首页</button>
+          </aside>
+          <section className="library-main">
+            <div className="mobile-library-head"><button className="brand" onClick={() => setView("home")}><span className="brand-mark">AI</span><span>Ada <b>AI导航</b></span></button></div>
+            <div className="library-header"><div><small>AI SKILL LIBRARY</small><h1>热门 AI Skills 实战库</h1><p>精选 GitHub 高 Star 公开项目 · 按任务分类 · 直达原始仓库</p></div><span className="tool-count"><b>{practiceItems.filter((item) => practiceFilter === "全部" || item.category === practiceFilter).length}</b> 个结果</span></div>
+            <div className="skill-source-note">Star 为 Skill 所属来源仓库的当前热度，不代表单个 Skill 的独立 Star。使用第三方 Skill 前请先检查权限、脚本与依赖。</div>
+            <div className="mobile-categories">{practiceCategories.map((item) => <button key={item} className={practiceFilter === item ? "active" : ""} onClick={() => setPracticeFilter(item)}>{item}</button>)}</div>
+            <div className="practice-grid tool-grid">
+            {practiceItems.filter((item) => practiceFilter === "全部" || item.category === practiceFilter).map((item) => (
+              <article className="tool-card skill-card" key={item.title}>
+                <button className="card-main" onClick={() => setSelectedPractice(item)}><span className="skill-logo">{item.icon}</span><div><h2>{item.title}{item.featured && <em>热门</em>}</h2><p>{item.desc}</p></div></button>
+                <div className="card-bottom"><div>{item.tags.slice(0, 2).map((tag) => <span key={tag}>{tag}</span>)}<span>★ {item.stars}</span></div><a href={item.repo} target="_blank" rel="noreferrer" aria-label={`查看 ${item.title} GitHub 仓库`}>↗</a></div>
+              </article>
             ))}
-          </div>
-        </section>
+            </div>
+          </section>
+        </div>
       )}
 
       {view === "vibe" && (
@@ -956,6 +982,20 @@ export default function Home() {
               <button onClick={() => toggleFavorite(selected.name)}>{favorites.includes(selected.name) ? "已收藏" : "♡ 收藏工具"}</button>
               <a href={`https://${selected.domain}`} target="_blank" rel="noreferrer">访问官网 ↗</a>
             </div>
+          </section>
+        </div>
+      )}
+
+      {selectedPractice && (
+        <div className="modal-backdrop" onMouseDown={() => setSelectedPractice(null)}>
+          <section className="tool-modal practice-modal" onMouseDown={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="practice-modal-title">
+            <button className="modal-close" onClick={() => setSelectedPractice(null)} aria-label="关闭">×</button>
+            <small>{selectedPractice.category}</small><h2 id="practice-modal-title">{selectedPractice.title}</h2>
+            <p>{selectedPractice.desc}</p>
+            <div className="practice-outcome"><small>公开来源</small><b>{selectedPractice.source} · 来源仓库 ★ {selectedPractice.stars}</b></div>
+            <div className="modal-tags">{selectedPractice.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+            <div className="modal-note"><b>使用提示</b><p>这是第三方公开 Skill。安装或运行前，请在 GitHub 原仓库查看最新说明、许可证、所需权限和脚本内容。</p></div>
+            <div className="modal-actions"><button onClick={() => setSelectedPractice(null)}>返回实战库</button><a href={selectedPractice.repo} target="_blank" rel="noreferrer">查看 GitHub ↗</a></div>
           </section>
         </div>
       )}
