@@ -176,24 +176,25 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
 .modal-actions button, .modal-actions a { display: grid; place-items: center; height: 46px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 13px; }
 .modal-actions button { border: 1px solid rgba(118, 126, 179, .3); background: rgba(26, 31, 66, .7); }
 .modal-actions a { background: linear-gradient(135deg, #755dff, #5541db); color: white; }
-.follow-modal { width: min(880px, 100%); max-height: calc(100vh - 36px); overflow-x: hidden; overflow-y: auto; text-align: center; }
+.follow-modal { width: min(1040px, 100%); max-height: calc(100vh - 36px); overflow-x: hidden; overflow-y: auto; text-align: center; }
 .follow-modal h2 { margin: 8px 0; }
 .follow-modal > p { color: #8c95b3; font-size: 12px; }
-.qr-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 25px; text-align: left; }
-.qr-card { min-width: 0; padding: 11px; display: grid; grid-template-columns: minmax(190px, 1.35fr) minmax(115px, .65fr); grid-template-rows: auto 1fr auto; gap: 9px 12px; border: 1px solid var(--line); border-radius: 17px; background: rgba(18, 23, 50, .82); }
-.qr-card-head { grid-column: 2; grid-row: 1; display: flex; align-items: center; gap: 9px; min-width: 0; min-height: 39px; }
+.qr-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 25px; text-align: left; }
+.qr-card { position: relative; min-width: 0; padding: 15px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; border: 1px solid rgba(132, 140, 196, .2); border-radius: 20px; background: linear-gradient(155deg, rgba(27, 33, 70, .95), rgba(13, 17, 39, .92)); box-shadow: 0 14px 32px rgba(3, 6, 22, .2); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.qr-card::before { position: absolute; inset: 0 0 auto; height: 2px; content: ""; background: linear-gradient(90deg, transparent, rgba(137, 119, 255, .85), transparent); opacity: .8; }
+.qr-card:hover { transform: translateY(-4px); border-color: rgba(137, 119, 255, .42); box-shadow: 0 20px 38px rgba(3, 6, 22, .32); }
+.qr-card-head { display: flex; align-items: center; gap: 11px; min-width: 0; min-height: 44px; }
 .qr-card-head > div { min-width: 0; }
-.qr-card-head > span { display: grid; place-items: center; flex: 0 0 auto; width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, #6552dd, #322968); color: white; font-size: 11px; font-weight: 900; }
+.qr-card-head > span { display: grid; place-items: center; flex: 0 0 auto; width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #6552dd, #322968); color: white; font-size: 12px; font-weight: 900; box-shadow: inset 0 1px 0 rgba(255,255,255,.2); }
 .qr-card.wechat .qr-card-head > span { background: linear-gradient(135deg, #20cf68, #079446); }
 .qr-card.douyin .qr-card-head > span { background: linear-gradient(135deg, #28eced, #fa2d61); }
-.qr-card.xiaohongshu .qr-card-head > span { background: linear-gradient(135deg, #ff3550, #b80d24); }
 .qr-card.bilibili .qr-card-head > span { background: linear-gradient(135deg, #52c8f0, #1685bf); }
-.qr-card-head b { display: block; font-size: 13px; }
-.qr-card-head small { display: block; max-width: 125px; margin-top: 3px; overflow: hidden; color: #828cac; font-size: 8px; white-space: nowrap; text-overflow: ellipsis; }
-.qr-image { grid-column: 1; grid-row: 1 / 4; display: block; width: 100%; min-height: 220px; padding: 0; overflow: hidden; border: 0; border-radius: 11px; background: white; }
+.qr-card-head b { display: block; font-size: 14px; }
+.qr-card-head small { display: block; margin-top: 4px; overflow: hidden; color: #929bbc; font-size: 9px; white-space: nowrap; text-overflow: ellipsis; }
+.qr-image { display: block; width: 100%; aspect-ratio: 1 / 1.02; padding: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,.76); border-radius: 14px; background: white; box-shadow: 0 8px 22px rgba(0,0,0,.18); cursor: zoom-in; }
 .qr-image img { display: block; width: 100%; height: 100%; object-fit: contain; background: white; }
-.qr-card > p { grid-column: 2; grid-row: 2; margin: 2px; color: #a7aec5; font-size: 9px; line-height: 1.55; }
-.qr-tip { grid-column: 2; grid-row: 3; display: block; margin: 0 2px; color: #676f90; font-size: 8px; }
+.qr-card > p { min-height: 34px; margin: 0 2px; color: #b0b7cf; font-size: 10px; line-height: 1.65; }
+.qr-tip { display: block; margin: auto 2px 0; color: #737c9f; font-size: 8px; }
 @keyframes fade { from { opacity: 0; } }
 @keyframes rise { from { opacity: 0; transform: translateY(15px) scale(.98); } }
 
@@ -284,7 +285,7 @@ main { position: relative; min-height: 100vh; overflow: hidden; }
   .tool-modal, .follow-modal { padding: 25px 20px 20px; border-radius: 20px; }
   .follow-modal { width: min(430px, 100%); max-height: calc(100vh - 24px); }
   .qr-grid { grid-template-columns: 1fr; gap: 12px; }
-  .qr-card { padding: 12px; display: block; }
+  .qr-card { padding: 14px; }
   .qr-card-head { margin-bottom: 10px; }
   .qr-card-head small { max-width: 260px; font-size: 9px; }
   .qr-image { aspect-ratio: 1 / 1.05; }
