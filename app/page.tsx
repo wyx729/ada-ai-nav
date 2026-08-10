@@ -175,14 +175,6 @@ const contacts = [
     tone: "douyin",
   },
   {
-    name: "小红书",
-    short: "红",
-    image: "/contact/xiaohongshu.jpeg",
-    account: "Ada聊AI · 63895799592",
-    note: "AI 教程、工作流与经验分享",
-    tone: "xiaohongshu",
-  },
-  {
     name: "B站",
     short: "B",
     image: "/contact/bilibili.jpeg",
